@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const routes= require("./Components/routes")
 const port = 8000
 
-
 dotenv.config({ path: "./config.env"})
 
 app.use(bodyParser.urlencoded({ extended: true}))

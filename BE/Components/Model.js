@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const userSchema = mongoose.Schema({
+const allUsersSchema = mongoose.Schema({
     firstName: {
         type: String, required: true
     },
@@ -10,28 +10,13 @@ const userSchema = mongoose.Schema({
     name:{
         type: String, required: true
     },
-    email: {
-        type: String, required: true
+    username: {
+        type: String, required: true, unique: true
+    },
+    friends: {
+        type: Array,
+        default: []
     }
-})
+},{ timestamps: true })
 
-const friendSchema = mongoose.Schema({
-    firstName: {
-        type: String, required: true
-    },
-    lastName: {
-        type: String, required: true
-    },
-    name:{
-        type: String, required: true
-    },
-    email: {
-        type: String, required: true
-    }
-},)
-
-module.exports.User = mongoose.model("MYUSER", userSchema)
-module.exports.Myfriend = mongoose.model("MYFRIEND", friendSchema)
-
-
-// module.exports = User;
+module.exports.User = mongoose.model("ALLUSER", allUsersSchema)
