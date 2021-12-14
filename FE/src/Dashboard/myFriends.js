@@ -1,15 +1,19 @@
 import { Fragment, useEffect } from "react"
 import { useState } from "react";
 import { useSelector } from "react-redux";
-const MyFriends = () => {
+import FriendsComponent from "./friendsComponent";
+const MyFriends = (props) => {
 
     const [myFriends, setMyFriends] = useState([]);
-    const friends = useSelector(state => state.myFriends)
-    console.log(friends)
+    const loginUser = useSelector(state => state.loginUser)
 
     useEffect(()=>{
-        fetch("/getAllFriends").then(res => res.json()).then(data => setMyFriends(data))
-    },[friends])
+        fetch("/getAllFriends",{
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(loginUser.email)
+        }).then(res => res.json()).then(data => setMyFriends(data))
+    },[])
 
     const removeFriendHandler = (data) => {
         fetch("/removeFriend",{
@@ -21,7 +25,7 @@ const MyFriends = () => {
     }
         return <Fragment>
             <div >
-                {myFriends.map(friend => <p onClick={()=>removeFriendHandler(friend)}>{friend.name}</p>)}
+                <FriendsComponent data = {myFriends}/>
             </div>
         </Fragment>
 }

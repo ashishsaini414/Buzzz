@@ -5,7 +5,6 @@ import classes from "./index.module.css";
 import { GoogleLogin } from "react-google-login";
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import {useState} from 'react'
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,16 +13,8 @@ const Login = () => {
   const successResponseGoogle = async (response) => {
       const { profileObj } = response;
       dispatch({type: "LOGIN_USER", data: profileObj})
-      // const loginObj = {
-      //     email: profileObj.email
-      // }
-      navigate("/dashboard")
+      navigate("/dashboard");
       console.log(profileObj)
-    // await fetch("/googlelogin",{
-    //     method: "POST",
-    //     headers: {"Content-Type":"application/json"},
-    //     body: JSON.stringify(loginObj)
-    //     })
   };
   const failureResponseGoogle = (response) => {
     console.log(response)
