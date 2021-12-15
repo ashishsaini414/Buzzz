@@ -6,5 +6,6 @@ router.post("/getAllFriends",users.getAllFriends)
 router.post("/createUser",users.createUser)
 router.post("/addFriend",users.addFriend)
 router.post("/removeFriend",users.removeFriend)
+router.post("/googleLogin",users.googleLogin)
 
 module.exports = router;

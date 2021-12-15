@@ -11,7 +11,10 @@ const allUsersSchema = mongoose.Schema({
         type: String, required: true
     },
     username: {
-        type: String, required: true, unique: true
+        type: String, required: true
+    },
+    imageUrl:{
+        type: String, default: ""
     },
     friends: {
         type: Array,
@@ -19,4 +22,4 @@ const allUsersSchema = mongoose.Schema({
     }
 },{ timestamps: true })
 
-module.exports.User = mongoose.model("ALLUSER", allUsersSchema)
+module.exports.User = mongoose.model("USER", allUsersSchema)

@@ -4,7 +4,13 @@ const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
 const routes= require("./Components/routes")
+const session = require("express-session");
+const cookieParser = require("cookie-parser")
+
 const port = 8000
+
+app.use(cookieParser())
+
 
 dotenv.config({ path: "./config.env"})
 
@@ -29,11 +35,6 @@ mongoose.connection.on("connected",()=>{
 
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
-
-app.post("/googlelogin",(req,res)=>{
-    console.log(req.body)
-    res.send("ok")
-})
 
 app.listen(port,()=>{
     console.log("Server is listening to this port - ", port)

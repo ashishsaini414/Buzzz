@@ -5,20 +5,40 @@ import classes from "./index.module.css";
 import { GoogleLogin } from "react-google-login";
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const [login, setLogin] = useState({})
   const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const successResponseGoogle = async (response) => {
-      const { profileObj } = response;
-      dispatch({type: "LOGIN_USER", data: profileObj})
+
+      await fetch("/googleLogin",{
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(response)
+      }).then(res => res.json()).then(data =>{
+            console.log(data)
+            // localStorage.remove("currentUser")
+            localStorage.setItem("currentUser",data.user.name);
+            localStorage.setItem("imageUrl",data.user.imageUrl);
+            localStorage.setItem("currentUserUsername",data.user.username)
+            console.log(localStorage.getItem("currentUser"))
+            // setLogin(prevState => [...prevState,data])
+            setLogin(data)
+      })
+      // console.clear()
+
+      console.log(login)
       navigate("/dashboard");
-      console.log(profileObj)
+
   };
   const failureResponseGoogle = (response) => {
-    console.log(response)
+    console.log(response);
+    console.log(login);
   }
+console.log(login)
   return (
     <Fragment>
       <div className={classes.loginContainer}>

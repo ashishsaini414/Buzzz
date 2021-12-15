@@ -1,0 +1,30 @@
+.addUser{
+    background-color: rgb(130, 130, 194);
+    border: none;
+    padding: 3px 5px;
+    cursor: pointer;
+}
+.addUser:active{
+    background-color: coral;
+}
+/* .userName{
+    display: inline-block ;
+    margin-right: 10px;
+} */
+.userImage{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.user{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* cursor: pointer; */
+    margin: 2px 5px
+}
+/* .user:active{
+    background-color: cornsilk;
+}
+.user:hover{
+    border: 2px solid blue;
+} */

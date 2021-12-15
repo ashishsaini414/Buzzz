@@ -21,5 +21,8 @@ module.exports.addFriend = async(req, res) => {
     const response  = await users.addFriend(req.body)
     res.send(response)
 }
+module.exports.googleLogin = async (req, res)=>{
+    const response = await users.googleLogin(req.body,res);
+}
 
 

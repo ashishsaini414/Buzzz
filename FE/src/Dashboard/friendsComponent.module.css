@@ -1,0 +1,21 @@
+.userFriends{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* cursor: pointer; */
+}
+.userFriends:active{
+    background-color: yellow;
+    cursor: pointer;
+}
+.userImageLink{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.removeUser{
+    background-color: rgb(130, 130, 194);
+    border: none;
+    padding: 3px 5px;
+    cursor: pointer;
+    font-size: 11px;
+}
