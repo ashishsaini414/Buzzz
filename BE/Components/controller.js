@@ -14,12 +14,14 @@ module.exports.getAllFriends = async(req, res) => {
 }
 module.exports.removeFriend = async(req, res) => {
     const response  = await users.removeFriend(req.body)
-    res.send(response)
+    // console.log(response)
+    res.send(JSON.stringify(response))
 }
 
 module.exports.addFriend = async(req, res) => {
     const response  = await users.addFriend(req.body)
-    res.send(response)
+    console.log(response)
+    res.send(JSON.stringify(response))
 }
 module.exports.googleLogin = async (req, res)=>{
     const response = await users.googleLogin(req.body,res);

@@ -47,19 +47,25 @@ module.exports.getAllFriends = async (loginUser) => {
 
 module.exports.addFriend = async (addFriend) => {
   try {
-    //find the login user
-    const loginUser = await users.User.findOne({
-      username: addFriend.loginUser,
-    });
-    //now add the added friend username to loginuser friend array's
-    if (!loginUser.friends.includes(addFriend.username)) {
-      const response = await loginUser.updateOne({
-        $push: { friends: addFriend.username},
+    if(!(addFriend.loginUser == addFriend.username)){
+      const loginUser = await users.User.findOne({
+        username: addFriend.loginUser,
       });
-      return response;
-    } else {
-      return "User already added";
+      //now add the added friend username to loginuser friend array's
+      if (!loginUser.friends.includes(addFriend.username)) {
+        const response = await loginUser.updateOne({
+          $push: { friends: addFriend.username},
+        });
+        return response;
+      } else {
+        return "User already added";
+      }
     }
+    else{
+      return "You can't add Yourself"
+    }
+    //find the login user
+    
   } catch (error) {
     return error.message;
   }
@@ -77,7 +83,7 @@ module.exports.removeFriend = async (removeFriend) => {
       });
       return response;
     } else {
-      return "User not found";
+      return "Already removed";
     }
   } catch (error) {
     return error.message;

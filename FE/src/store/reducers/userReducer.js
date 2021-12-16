@@ -1,17 +1,16 @@
 const initialUsersState = {
     loginUser: {},
-    myFriends: []
+    myFriends: [],
+    addFriend: {}
 }
 const userReducer = (state = initialUsersState, action) => {
     switch(action.type){
         case "LOGIN_USER" : {
-            // console.log(action.data)
-            state.myFriends.push(action.data)
-            // console.log("nnknj"+ initialUsersState);
-            return {...state.myFriends}
+            console.log("test")
+            return {...state, loginUser: action.data}
         }
         case "ADD_FRIEND": {
-            return [...initialUsersState.myFriends, action.data]
+            return {...state.addFriend, ...action.payload}
         }
         default: {
             return state

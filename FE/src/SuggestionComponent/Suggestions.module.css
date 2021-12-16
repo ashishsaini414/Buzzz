@@ -1,0 +1,38 @@
+.user{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.user:hover{
+    background-color: cadetblue;
+    cursor: default;
+}
+.user:active{
+    cursor: pointer;
+}
+.addUserButton{
+    background-color: rgb(130, 130, 194);
+    border: none;
+    padding: 3px 5px;
+    cursor: pointer;
+}
+.addUser:active{
+    background-color: coral;
+}
+.userImage{
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+}
+
+.addUserButton{
+    background-color: rgb(114, 202, 191);
+    border: none;
+    padding: 6px 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+}
+.addUserButton:active{
+    background-color: rgb(150, 74, 74);
+}

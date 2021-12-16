@@ -21,17 +21,18 @@ const Login = () => {
       }).then(res => res.json()).then(data =>{
             console.log(data)
             // localStorage.remove("currentUser")
-            localStorage.setItem("currentUser",data.user.name);
-            localStorage.setItem("imageUrl",data.user.imageUrl);
-            localStorage.setItem("currentUserUsername",data.user.username)
-            console.log(localStorage.getItem("currentUser"))
+            dispatch({type: "LOGIN_USER", data: data})
+            sessionStorage.setItem("currentUser",data.user.name);
+            sessionStorage.setItem("imageUrl",data.user.imageUrl);
+            sessionStorage.setItem("currentUserUsername",data.user.username)
+            // console.log(localStorage.getItem("currentUser"))
             // setLogin(prevState => [...prevState,data])
-            setLogin(data)
+            // setLogin(data)
       })
       // console.clear()
 
       console.log(login)
-      navigate("/dashboard");
+      navigate("/api/dashboard");
 
   };
   const failureResponseGoogle = (response) => {
@@ -54,7 +55,7 @@ console.log(login)
           onSuccess={successResponseGoogle}
           onFailure={failureResponseGoogle}
           cookiePolicy={"single_host_origin"}
-          isSignedIn={true}
+          // isSignedIn={true}
         />
       </div>
     </Fragment>
