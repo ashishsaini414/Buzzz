@@ -26,5 +26,9 @@ module.exports.addFriend = async(req, res) => {
 module.exports.googleLogin = async (req, res)=>{
     const response = await users.googleLogin(req.body,res);
 }
+module.exports.createPost = async (req, res) => {
+    const response = await users.createPost(req.body);
+    res.send(JSON.stringify(response))
+}
 
 

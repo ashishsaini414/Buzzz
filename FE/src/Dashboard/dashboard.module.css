@@ -77,3 +77,11 @@
 .logoutLink:active{
     background-color: rgb(153, 63, 63);
 }
+
+.posts{
+    background-color: blue;
+    width: 40em;
+    border: 1px solid yellow;
+    position: absolute;
+    margin-left: 20em;
+}

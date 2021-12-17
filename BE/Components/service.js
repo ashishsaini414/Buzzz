@@ -47,6 +47,7 @@ module.exports.getAllFriends = async (loginUser) => {
 
 module.exports.addFriend = async (addFriend) => {
   try {
+    //find the login user
     if(!(addFriend.loginUser == addFriend.username)){
       const loginUser = await users.User.findOne({
         username: addFriend.loginUser,
@@ -64,7 +65,6 @@ module.exports.addFriend = async (addFriend) => {
     else{
       return "You can't add Yourself"
     }
-    //find the login user
     
   } catch (error) {
     return error.message;
@@ -152,4 +152,20 @@ module.exports.googleLogin = async (loginData, res) =>{
   catch(err){
     res.send(err.message)
   }
+}
+
+module.exports.createPost =async (postData)=>{
+        const {message, user, postImages} = postData;
+        // console.log(postData)
+      try{
+            const newPost = await users.Posts.create({message, user})
+            for(const key in postImages){
+            const response = await newPost.updateOne({ $push: { imagesUrl: postImages[key]}});
+            }
+          const returnUser = await users.Posts.findById(newPost._id)
+          return returnUser;
+      }
+      catch(error){
+        return error.message;
+      }
 }

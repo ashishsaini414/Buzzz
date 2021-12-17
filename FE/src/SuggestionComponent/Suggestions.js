@@ -33,7 +33,7 @@ const Suggestions = (props) => {
           {suggest.map(data => {
               return(
                 <>
-                  <EachSuggestion suggestion = {data} addFriend={addFriendHandler}/>
+                  <EachSuggestion suggestion = {data} addFriend={addFriendHandler} />
                 </>
               )
           })}

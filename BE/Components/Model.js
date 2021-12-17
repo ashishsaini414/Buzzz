@@ -22,4 +22,22 @@ const allUsersSchema = mongoose.Schema({
     }
 },{ timestamps: true })
 
-module.exports.User = mongoose.model("USER", allUsersSchema)
+const postsSchema = mongoose.Schema({
+    message:{
+        type: String, required: true
+    },
+    user:{
+        type: String, required: true
+    },
+    imagesUrl:{
+        type: Array,
+        default: []
+    },
+    likes:{
+        type: Array,
+        default: []
+    }
+},{ timestamps: true})
+
+module.exports.Posts = mongoose.model("POST",postsSchema);
+module.exports.User = mongoose.model("USER", allUsersSchema);

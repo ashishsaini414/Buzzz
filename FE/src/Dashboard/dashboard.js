@@ -6,6 +6,7 @@ import Suggestions from "../SuggestionComponent/Suggestions";
 import MyFriends from "../FriendsComponent/allFriends";
 import { GoogleLogout} from 'react-google-login';
 import { useNavigate } from "react-router-dom";
+import Posts from '../Posts/posts';
 import userLogo from '../Assets/Images/userlogo';
 
 
@@ -24,7 +25,7 @@ const Dashboard = () => {
 
   const logout = (response) => {
     console.clear()
-    navigate("/login")
+    navigate("/")
     sessionStorage.removeItem("currentUser")
     sessionStorage.removeItem("currentUserUsername")
     sessionStorage.removeItem("imageUrl")
@@ -53,6 +54,7 @@ const Dashboard = () => {
           </GoogleLogout>
         </div>
       </nav>
+      
       <aside className={classes.asideComponents}>
       <div className={classes.suggestionsComponent}>
         <h2 className={classes.suggestionHeader}>Suggestions</h2>
@@ -69,6 +71,9 @@ const Dashboard = () => {
         </div>
       </div>
       </aside>
+      <article className={classes.posts}>
+              <Posts/>
+      </article>
       </div>
     </Fragment>
   );

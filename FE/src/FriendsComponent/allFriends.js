@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from "react"
 import { useState } from "react";
 import EachFriend from "./eachFriend";
-import { useSelector } from "react-redux";
+
 const MyFriends = (props) => {
     const { addFriend} = props;
     const [myFriends, setMyFriends] = useState([]);
@@ -13,7 +13,7 @@ const MyFriends = (props) => {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({loginUser: currentUserUsername})
         }).then(res => res.json()).then(data => setMyFriends(data))
-    },[removedFriend, addFriend])
+    },[removedFriend, addFriend, currentUserUsername])
     
     const removeFriendHandler = (res) => {
         console.log(res)

@@ -1,8 +1,7 @@
 import classes from './Suggestions.module.css';
 import { toast } from "react-toastify";
 import { useState } from 'react';
-import { FaUser } from 'react-icons/fa';
-import ttnlogo from '../Assets/Images/userlogo';
+import userLogo from '../Assets/Images/userlogo';
 
 
 const EachSuggestion = (props) => {
@@ -18,10 +17,10 @@ const EachSuggestion = (props) => {
             body: JSON.stringify({loginUser: currentUserUsername, username:friend.username})
         }).then(res => res.json()).then(data => {
             // dispatch({type:"ADD_FRIEND", data: data});
-              if(data == "You can't add Yourself"){
+              if(data === "You can't add Yourself"){
                 toast.warn("You can't add Yourself")
               }
-              else if(data == "User already added"){
+              else if(data === "User already added"){
                 toast.warn("User already added")
               }
               else{
@@ -38,7 +37,7 @@ const EachSuggestion = (props) => {
 
     return(
         <div className={classes.user}>
-        <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",ttnlogo)}} alt=""></img>
+        <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",userLogo)}} alt=""></img>
         <p  className={classes.userName}>{suggestion.name}</p>
         {!addFriendBoolean ? <button className={classes.addUserButton} onClick={(event) => addFriendHandler(suggestion)} >Add</button>
         : <button >Added</button>}
