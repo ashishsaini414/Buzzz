@@ -30,10 +30,11 @@ const Suggestions = (props) => {
     }
   return <Fragment>
       <div>
-          {suggest.map(data => {
+          {suggest.map((data, index) => {
+            console.log(index)
               return(
                 <>
-                  <EachSuggestion suggestion = {data} addFriend={addFriendHandler} />
+                  <EachSuggestion suggestion = {data} addFriend={addFriendHandler} key={index} />
                 </>
               )
           })}

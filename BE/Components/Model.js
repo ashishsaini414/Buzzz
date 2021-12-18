@@ -27,7 +27,7 @@ const postsSchema = mongoose.Schema({
         type: String, required: true
     },
     user:{
-        type: String, required: true
+        type: Object, required: true
     },
     imagesUrl:{
         type: Array,

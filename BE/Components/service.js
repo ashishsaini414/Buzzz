@@ -158,14 +158,43 @@ module.exports.createPost =async (postData)=>{
         const {message, user, postImages} = postData;
         // console.log(postData)
       try{
-            const newPost = await users.Posts.create({message, user})
+            const ownerOfPost = await users.User.findOne({username: user})
+            const newPost = await users.Posts.create({message, user: ownerOfPost})
             for(const key in postImages){
             const response = await newPost.updateOne({ $push: { imagesUrl: postImages[key]}});
             }
-          const returnUser = await users.Posts.findById(newPost._id)
-          return returnUser;
+          const returnPost = await users.Posts.findById(newPost._id)
+          return returnPost;
       }
       catch(error){
         return error.message;
       }
+}
+module.exports.getAllPosts = async (dataReceiveFromClient) => {
+  const {username, page } = dataReceiveFromClient;
+  const friendsAllPosts = []
+  const integerNumberOfPage = parseInt(page)
+  const limit = 3;
+  const firstIndex = (integerNumberOfPage-1)*limit;
+  const lastIndex = integerNumberOfPage*limit;
+
+  try{
+
+    const user = await users.User.findOne({username: username})
+    const userAllPosts = await users.Posts.find({"user.username" : username})
+
+    for(const key in user.friends){      
+      const result = await users.Posts.find({"user.username": user.friends[key]})
+      friendsAllPosts.push(...result)
+    }
+    const AllPosts = userAllPosts.concat(friendsAllPosts)
+    //for pagination
+    const returningAllPosts = AllPosts.slice(firstIndex,lastIndex)
+
+    return returningAllPosts;
+
+  }catch(err){
+    return err.message
+  }
+
 }

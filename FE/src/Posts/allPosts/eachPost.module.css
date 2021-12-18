@@ -1,0 +1,17 @@
+.post{
+    border: 1px solid green;
+    margin: 1em auto;
+}
+.postImages{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border: 5px dotted blue;
+    height: 20em;
+    width: 20em;
+    background-color: red;
+}
+.eachImage{
+    height: 7em;
+    width: 7em;
+}

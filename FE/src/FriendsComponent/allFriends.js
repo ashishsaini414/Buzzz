@@ -21,9 +21,9 @@ const MyFriends = (props) => {
     }
         return <Fragment>
             <div>
-                {myFriends.map(friend => {
+                {myFriends.map((friend,index) => {
                   return <>
-                   <EachFriend data={friend} removeFriend={removeFriendHandler}/>
+                   <EachFriend key ={index} data={friend} removeFriend={removeFriendHandler} />
                 </>
                 })
                 }

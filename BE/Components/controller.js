@@ -30,5 +30,9 @@ module.exports.createPost = async (req, res) => {
     const response = await users.createPost(req.body);
     res.send(JSON.stringify(response))
 }
+module.exports.getAllPosts = async (req, res) => {
+    const response = await users.getAllPosts(req.body);
+    res.send(JSON.stringify(response))
+}
 
 
