@@ -1,0 +1,27 @@
+.FirstRow{
+    background-color: red;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 8px 0;
+}
+.activityButton{
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    color: rgb(20, 65, 148);
+}
+.secondRow{
+    display: flex;
+    margin: 5px 10px;
+    height: 2.5em;
+}
+.userImage{
+    border-radius: 50%;
+}
+.enterCommentField{
+    margin:4px 5px;
+    border-radius: 50px;
+    width: 100%;
+    padding: 5px;
+
+}

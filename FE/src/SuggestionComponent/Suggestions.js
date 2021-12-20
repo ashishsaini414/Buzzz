@@ -12,7 +12,8 @@ const Suggestions = (props) => {
     const [addFriendState, setAddFriendState] = useState({})
     console.log(suggest)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
-    const user = useSelector((state) => state.loginUser.loginUser.user);
+    const user = useSelector((state) => state);
+    console.log(user)
 
     useEffect(()=>{
         fetch("/getAllSuggestions")

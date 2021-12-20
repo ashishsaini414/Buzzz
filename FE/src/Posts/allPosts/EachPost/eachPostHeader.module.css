@@ -1,0 +1,22 @@
+.PostHeader{
+    border: 1px solid rgb(199, 29, 185);
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 5px;
+}
+.userImage{
+    height: 2.5em;
+
+}
+.middlePart{
+    /* background-color: red; */
+    font-size: 10px;
+    margin-left: 10px;
+}
+.startingPart{
+    display: flex;
+}
+.postOptions{
+    /* background-color: red; */
+    float: right;
+}

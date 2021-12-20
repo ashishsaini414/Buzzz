@@ -14,7 +14,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
   // const [currentUser, setCurrentUser] = useState({})
   const [addFriend, setAddFriend] = useState({})
-  const user = useSelector((state) => state.loginUser.loginUser.user);
+  const user = useSelector((state) => state);
   // console.clear()
   // console.log(user) 
   // console.log("test")
@@ -54,26 +54,29 @@ const Dashboard = () => {
           </GoogleLogout>
         </div>
       </nav>
-      
-      <aside className={classes.asideComponents}>
-      <div className={classes.suggestionsComponent}>
-        <h2 className={classes.suggestionHeader}>Suggestions</h2>
-         <div className={classes.suggestionList}>
-            <Suggestions key={Math.random().toString()} addFriend={addFriendHandler}/>
-         </div>
-      </div>
-      <div className={classes.myFriends}>
+     
+      <div className={classes.middleComponents}> 
+        <div className={classes.posts}>
+                <Posts/>
+        </div>
+        <aside className={classes.asideComponents}>
         <div className={classes.suggestionsComponent}>
-          <h2 className={classes.suggestionHeader}>MyFriends</h2>
-         <div className={classes.suggestionList}>
-        <MyFriends loginUser={user}  key={Math.random().toString()} addFriend={addFriend}/>
+          <h2 className={classes.suggestionHeader}>Suggestions</h2>
+          <div className={classes.suggestionList}>
+              <Suggestions key={Math.random().toString()} addFriend={addFriendHandler}/>
+          </div>
         </div>
+        <div className={classes.myFriends}>
+          <div className={classes.suggestionsComponent}>
+            <h2 className={classes.suggestionHeader}>MyFriends</h2>
+          <div className={classes.suggestionList}>
+          <MyFriends loginUser={user}  key={Math.random().toString()} addFriend={addFriend}/>
+          </div>
+          </div>
         </div>
+        </aside>
+      
       </div>
-      </aside>
-      <article className={classes.posts}>
-              <Posts/>
-      </article>
       </div>
     </Fragment>
   );

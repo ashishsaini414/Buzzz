@@ -21,7 +21,7 @@ const Login = () => {
       }).then(res => res.json()).then(data =>{
             console.log(data)
             // localStorage.remove("currentUser")
-            dispatch({type: "LOGIN_USER", data: data})
+            dispatch({type: "LOGIN_USER", payload: data})
             sessionStorage.setItem("currentUser",data.user.name);
             sessionStorage.setItem("imageUrl",data.user.imageUrl);
             sessionStorage.setItem("currentUserUsername",data.user.username)
@@ -32,7 +32,7 @@ const Login = () => {
       // console.clear()
 
       console.log(login)
-      navigate("/api/dashboard");
+      navigate("/dashboard");
 
   };
   const failureResponseGoogle = (response) => {

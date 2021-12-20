@@ -10,9 +10,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* background-color: red; */
+    background-color: rgb(104, 104, 97);
     height: 4em;
 }
+
 .navprofile{
     display: flex;
     height: 3em;
@@ -28,14 +29,29 @@
     font-size: 1.1em;
     font-weight: bold;
 }
+.middleComponents{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1em;
+}
+
+.posts{
+    background-color: rgb(185, 185, 235);
+    width: 40em;
+    border: 1px solid yellow;
+    /* position: absolute; */
+    margin-left: 20em;
+}
+
 .asideComponents{
-    width: 14em;
-    position: absolute;
-    right: 0;
+    /* width: 14em; */
+    /* position: absolute; */
+    /* right: 0; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 50em;
+    /* width: 15em; */    /*THIS WILL HAVE TO UNCOMMMENT INFUTRE FOR ASIDE COMPONENT WIDHT*/
     /* align-items: flex-end; */
     /* margin: 0px 25px 0 0; */
     background-color: rgb(94, 94, 232);
@@ -78,10 +94,3 @@
     background-color: rgb(153, 63, 63);
 }
 
-.posts{
-    background-color: rgb(185, 185, 235);
-    width: 40em;
-    border: 1px solid yellow;
-    position: absolute;
-    margin-left: 20em;
-}

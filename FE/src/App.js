@@ -13,7 +13,7 @@ function App() {
       <Routes>
          <Route path="/" exact element={<Login/>}/>:  
          {/* { currentUser ? <Route path="/api/dashboard" element={<Dashboard/>}/> : <Route to="/api/dashboard" element={<Navigate to="/login" element={<Login/>}/>}></Route>} */}
-         <Route path="/api/dashboard" element={<Dashboard/>}/>
+         <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </div>
   );

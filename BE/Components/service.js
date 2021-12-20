@@ -156,13 +156,17 @@ module.exports.googleLogin = async (loginData, res) =>{
 
 module.exports.createPost =async (postData)=>{
         const {message, user, postImages} = postData;
-        // console.log(postData)
       try{
             const ownerOfPost = await users.User.findOne({username: user})
             const newPost = await users.Posts.create({message, user: ownerOfPost})
-            for(const key in postImages){
-            const response = await newPost.updateOne({ $push: { imagesUrl: postImages[key]}});
-            }
+            if(postImages.length !== 0){
+              for(const key in postImages){
+                  const response = await newPost.updateOne({ $push: { imagesUrl: {url: postImages[key]}}});
+                }
+              }
+            else {
+                const response = await newPost.updateOne({ $push: { imagesUrl: {url: ""}}});
+              }
           const returnPost = await users.Posts.findById(newPost._id)
           return returnPost;
       }
