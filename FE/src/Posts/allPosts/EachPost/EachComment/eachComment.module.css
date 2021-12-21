@@ -1,0 +1,25 @@
+.singleComment{
+    border-top: 1px solid blue;
+    border-bottom: 1px solid blue;
+    background-color: rgb(204, 138, 197);
+    /* margin: 2px; */
+}
+.commentOwner{
+    display: flex;
+    height: 2em;
+    border-bottom: 1px solid seagreen;
+    padding: 1px;
+}
+.ownerImageLink{
+    border-radius: 20px;
+}
+.ownerName{
+    color: sienna;
+    margin: auto 5px;
+}
+.message{
+    text-align: left;
+    margin-left: 2.3em;
+    text-transform: capitalize;
+    /* border: 1px solid red; */
+}

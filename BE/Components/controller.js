@@ -34,5 +34,17 @@ module.exports.getAllPosts = async (req, res) => {
     const response = await users.getAllPosts(req.body);
     res.send(JSON.stringify(response))
 }
+module.exports.postReaction = async (req, res)=>{
+    const response  = await users.postReaction(req.body)
+    res.send(JSON.stringify(response))
+}
+module.exports.postComment = async (req, res)=>{
+    const response = await users.postComment(req.body)
+    res.send(JSON.stringify(response))
+}
+module.exports.getPostAllComments = async (req, res)=>{
+    const response = await users.getPostAllComments(req.body)
+    res.send(JSON.stringify(response))
+}   
 
 

@@ -2,6 +2,7 @@ const users = require("./Model");
 const { OAuth2Client } = require("google-auth-library")
 const client = new OAuth2Client("434076698303-4vqlab3auqoeeclm3tkm2c2ki7cpghvp.apps.googleusercontent.com");
 const jwt = require("jsonwebtoken");
+const { mongo, Types } = require("mongoose");
 
 module.exports.getAllSuggestions = async () => {
   try {
@@ -201,4 +202,67 @@ module.exports.getAllPosts = async (dataReceiveFromClient) => {
     return err.message
   }
 
+}
+
+module.exports.postReaction = async (dataFromClient) =>{
+  const { reaction,postId, user} = dataFromClient;
+  try{
+    const post = await users.Posts.findById(postId)
+    // console.log(post)
+    if(reaction === "like"){
+      console.log("hii this is starting for like")
+        const res = await post.updateOne({$push: {"postReactions.likes" : user}})
+        const updatedpost = await users.Posts.findById(postId);
+        const totallikes = await updatedpost.postReactions.likes.length
+        console.log(totallikes)
+        return {updatedpost, totallikes}
+    }
+    if(reaction === "unlike"){
+      console.log("hii this is starting for unlike")
+        const response = await post.updateOne({$pull : {"postReactions.likes": user}});
+        const updatedpost = await users.Posts.findById(postId);
+        const totallikes = await updatedpost.postReactions.likes.length
+        console.log(totallikes)
+        return {updatedpost, totallikes}
+    }
+     if(reaction === "dislike"){
+      console.log("hii this is starting for dislike")
+        const res = await post.updateOne({$push: {"postReactions.dislikes" : user}})
+        const updatedpost = await users.Posts.findById(postId);
+        const totalDislikes = await updatedpost.postReactions.dislikes.length
+        console.log(totalDislikes)
+        return {updatedpost, totalDislikes}
+    }
+    if(reaction === "unDislike"){
+      console.log("hii this is starting for unDislike")
+        const response = await post.updateOne({$pull : {"postReactions.dislikes": user}});
+        const updatedpost = await users.Posts.findById(postId);
+        const totalDislikes = await updatedpost.postReactions.dislikes.length
+        console.log(totalDislikes)
+        return {updatedpost, totalDislikes}
+    }
+  }
+  catch(err){
+    return err.message
+  }
+}
+
+module.exports.postComment =async (dataFromClient)=>{
+    const {message, postId, user} = dataFromClient;
+    try{
+      const ownerOfComment = await users.User.findOne({username: user});
+      const currentPost = await users.Posts.findByIdAndUpdate(postId,{$push: {comments: {message,ownerOfComment, _id: new Types.ObjectId()}}});
+      const updatedPost = await users.Posts.findById(postId);
+      return updatedPost
+    }
+    catch(error){
+      return error.message
+    }
+    
+}
+
+module.exports.getPostAllComments = async (dataFromClient) => {
+    const {postId} = dataFromClient;
+    const allComments = await users.Posts.findById(postId);
+    return allComments.comments;
 }

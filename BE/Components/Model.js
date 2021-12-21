@@ -20,7 +20,7 @@ const allUsersSchema = mongoose.Schema({
         type: Array,
         default: []
     }
-},{ timestamps: true })
+},{ timestamps: true,versionKey: false })
 
 const postsSchema = mongoose.Schema({
     message:{
@@ -33,11 +33,21 @@ const postsSchema = mongoose.Schema({
         type: Array,
         default: []
     },
-    likes:{
+    postReactions: {
+        likes:{
+            type: Array,
+            default: []
+        },
+        dislikes:{
+            type: Array,
+            default: []
+        }
+    },
+    comments:{
         type: Array,
         default: []
     }
-},{ timestamps: true})
+},{ timestamps: true, minimize: false, versionKey: false})
 
 module.exports.Posts = mongoose.model("POST",postsSchema);
 module.exports.User = mongoose.model("USER", allUsersSchema);

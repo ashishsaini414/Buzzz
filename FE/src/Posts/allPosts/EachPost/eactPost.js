@@ -25,7 +25,7 @@ const EachPost = (props) => {
         //styling issue of images in this slider
         />
         </div>}
-        <footer><EachPostFooter/></footer>
+        <footer><EachPostFooter post={post}/></footer>
       </div>
     </>
   );
