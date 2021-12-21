@@ -7,13 +7,13 @@ import { FaUser} from 'react-icons/fa'
 import EachSuggestion from "./eachSuggestion";
 
 const Suggestions = (props) => {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const [suggest, setSuggest] = useState([])
     const [addFriendState, setAddFriendState] = useState({})
     console.log(suggest)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
-    const user = useSelector((state) => state);
-    console.log(user)
+    // const user = useSelector((state) => state);
+    // console.log(user)
 
     useEffect(()=>{
         fetch("/getAllSuggestions")

@@ -13,7 +13,7 @@ const AllPosts = (props) => {
   const currentUserUsername = sessionStorage.getItem("currentUserUsername");
 
   const dispatch = useDispatch();
-  const allPostsDataFromRedux = useSelector(state => state.posts)
+  const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
   console.log(allPostsDataFromRedux)
 
   if(allPostsState === []){

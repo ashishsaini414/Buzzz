@@ -1,22 +1,18 @@
 
-// const initialState = {
-    
-// }
-const postReducer = (state = [],action) => {
+const initialState = {
+    allposts: [],
+    postComments: []
+}
+const postReducer = (state = initialState,action) => {
     switch(action.type){
         case "ADD_NEW_POSTS" : {
-            return [...state, ...action.payload]
+            console.log(action.payload)
+            return {...state, allposts: [...state.allposts, ...action.payload]}
         }
         case "UPDATE_LIKE_DISLIKE":{
-            const newpost = state.filter((post,index) => {
-                if(post._id === action.payload._id){
-                    state.splice(index,1,action.payload)
-                }
-            })
-            return [...state]
         }
-        case "LOAD_ALL_POST_COMMENTS":{
-            
+        case "LOAD_POST_COMMENTS":{
+            return {...state, postComments: [...action.payload]}
         }
         default: {
             return state

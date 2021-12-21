@@ -10,12 +10,11 @@ const EachPostFooter = (props) =>{
     const [likeToggle, setLikeToggle] = useState(false)
     const [dislikeToggle, setDisLikeToggle] = useState(false)
     const [postComment, setPostComment] = useState("")
-    const [allCommentsData, setAllCommentsData] = useState([])
     const [commentsShow, setCommentsShow] = useState(true)
 
     const dispatch = useDispatch();
-    const selector = useSelector(state => state.posts)
-    console.log(selector)
+    const postComments = useSelector(state => state.posts.postComments)
+    // console.log(postComments)
     
 
     const currentUserimageUrl = sessionStorage.getItem("imageUrl")
@@ -40,7 +39,6 @@ const EachPostFooter = (props) =>{
         })
         const res = await response.json()
         console.log(res)
-        // dispatch({type: "UPDATE_LIKE_DISLIKE",payload: res.updatedpost})
 
         setLikeToggle(prevState => !prevState)
     }
@@ -52,7 +50,7 @@ const EachPostFooter = (props) =>{
             body: JSON.stringify({user: currentUserUsername, reaction: condition, postId: dislikePost._id})
         })
         const res = await response.json()
-        console.log(res)
+        // console.log(res)
         setDisLikeToggle(prevState => !prevState)
     }
 
@@ -66,7 +64,7 @@ const EachPostFooter = (props) =>{
         const result = await response.json()
         toast.success(`Comment added successfully`)
         setPostComment("")
-        console.log(result)
+        // console.log(result)
         
     }
     const PostAllCommentsHandler = async () =>{
@@ -78,40 +76,7 @@ const EachPostFooter = (props) =>{
                 body: JSON.stringify({postId: post._id})
             })
             const result = await response.json()
-            // setAllCommentsData(prevState => {
-            //     if(prevState){
-            //         console.log(prevState)
-            //         const newarrr =[]
-            //         console.log(result)
-            //         prevState.map(c => {
-            //            const new6 =  result.map(ce => {
-            //                 if(c._id !== ce._id ){
-            //                     // newarrr.push(ce)
-            //                     return ce
-            //                 }
-            //             })
-            //         console.log(new6)
-            //         })
-            //         return [...prevState, ...result]
-            //     }
-            //     else {
-            //         return [...result]
-            //     }
-                
-            // })
-            // setAllCommentsData(prevState => { 
-            //     console.log(prevState)
-            //     console.log(result)
-            //     const newarr = prevState.map(c => {
-            //         for(const key in result){
-            //             if(result[key]._id !== c._id){
-            //                 return result[key]
-            //             }
-            //         }
-            //     })
-            //     return newarr
-            // })
-            setAllCommentsData(prevState => [...prevState, ...result])   //PROBLEM OF DUPICACY OF DATA
+            dispatch({type: "LOAD_POST_COMMENTS", payload: result})
         }
     }
     return(<div>
@@ -126,13 +91,13 @@ const EachPostFooter = (props) =>{
         </div>
         <div className={classes.secondRow}>
             <img src={currentUserimageUrl} className={classes.userImage}></img>
-            <form onSubmit={commentSubmitHandler}>
+            <form onSubmit={commentSubmitHandler} className={classes.commentForm}>
                 <input className={classes.enterCommentField} value={postComment} onChange={(e)=> setPostComment(e.target.value)} placeholder="Write a comment ..."></input>
             </form>
        
         </div>
         { !commentsShow ? 
-            allCommentsData.map((singleComment,index) => {
+            postComments.map((singleComment,index) => {
                 return <div>
                          <EachComment key={index} singleComment={singleComment}/>
                     </div>

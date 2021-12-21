@@ -18,10 +18,12 @@
 .userImage{
     border-radius: 50%;
 }
-.enterCommentField{
-    margin:4px 5px;
-    border-radius: 50px;
+.commentForm{
     width: 100%;
-    padding: 5px;
-
+}
+.enterCommentField{
+    margin:4px 4px;
+    border-radius: 50px;
+    width: 98%;
+    padding: 5px 3px;
 }

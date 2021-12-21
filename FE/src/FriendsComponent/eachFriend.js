@@ -2,14 +2,11 @@ import { Fragment } from "react";
 import classes from './friendsComponent.module.css';
 import { toast } from 'react-toastify';
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import userLogo from '../Assets/Images/userlogo';
 
 const FriendsComponent = (props) => {
   const { data } = props;
   const [addFriend, setAddFriend] = useState({});
-  const dispatch = useDispatch()
-    // const user = useSelector(state => state.loginUser.loginUser.user)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
 
     const removeFriendHandler = async (friend)=>{
