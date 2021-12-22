@@ -10,7 +10,7 @@ const EachComment = (props) => {
                     <p className={classes.ownerName}>{ownerOfComment.name}</p>
                 </div>
                 <div className={classes.message}>
-                    <p>{singleComment.message}</p>
+                    <p>{message}</p>
                 </div>
          </div>
 }

@@ -61,14 +61,20 @@ const Dashboard = () => {
         </div>
         <aside className={classes.asideComponents}>
         <div className={classes.suggestionsComponent}>
-          <h2 className={classes.suggestionHeader}>Suggestions</h2>
+          <div className={classes.suggestionHeader}>
+            <h2 className={classes.suggestionTitle}>Suggestions</h2>
+            <span className={classes.searchIcon}><i className="fas fa-search"></i></span>
+          </div>
           <div className={classes.suggestionList}>
               <Suggestions key={Math.random().toString()} addFriend={addFriendHandler}/>
           </div>
         </div>
         <div className={classes.myFriends}>
           <div className={classes.suggestionsComponent}>
-            <h2 className={classes.suggestionHeader}>MyFriends</h2>
+          <div className={classes.suggestionHeader}>
+            <h2 className={classes.suggestionTitle}>Contacts</h2>
+            <span className={classes.searchIcon}><i className="fas fa-search"></i></span>
+          </div>
           <div className={classes.suggestionList}>
           <MyFriends loginUser={user}  key={Math.random().toString()} addFriend={addFriend}/>
           </div>

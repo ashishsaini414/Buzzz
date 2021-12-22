@@ -46,5 +46,11 @@ module.exports.getPostAllComments = async (req, res)=>{
     const response = await users.getPostAllComments(req.body)
     res.send(JSON.stringify(response))
 }   
+module.exports.getPostLikesDislikesCommentsValues = async(req, res)=>{
+    // console.log(req.body)
+    const response = await users.getPostLikesDislikesCommentsValues(req.body)
+    res.send(JSON.stringify(response))
+    // console.log(response)
+}
 
 

@@ -266,3 +266,12 @@ module.exports.getPostAllComments = async (dataFromClient) => {
     const allComments = await users.Posts.findById(postId);
     return allComments.comments;
 }
+
+module.exports.getPostLikesDislikesCommentsValues = async (dataFromClient)=>{
+  const {postId} = dataFromClient
+  const currentPost = await users.Posts.findById(postId)
+  const totalLikes = currentPost.postReactions.likes.length;
+  const totalDislikes = currentPost.postReactions.dislikes.length;
+  const totalComments = currentPost.comments.length;
+  return {totalLikes,totalDislikes,totalComments};
+}

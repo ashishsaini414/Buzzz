@@ -1,12 +1,12 @@
 .CreatePost{
     display: flex;
-}
-.postForm{
-    margin: 5px;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.4em 0.1em;
 }
 .userImage{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     margin: 5px 5px;
 }
@@ -14,27 +14,31 @@
     margin: 5px 0px;
     border-radius: 15px;
     width: 30em;
-    padding: 5px 10px;
+    padding: 8px 10px;
+    border: none;
+    background-color: var(--light-grey);
 }
 .fileUploadLabel{
-    margin: 1em 0.6em;
-    padding: 5px 7px;
-    font-size: 14px;
+    padding: 7px 9px;
+    font-size: 0.9em;
     cursor: pointer;
-    color: rgb(26, 151, 19);
-    /* border: 1px solid red; */
+    color: var(--grey);
 }
 .fileUploadLabel:active{
-    background-color: violet;
+    background-color: var(--sky-blue);
+    border-radius: 10px;
+
+}
+.fileUploadIcon{
+    color: green;
 }
 .fileUpload{
-    /* opacity: 0; */
     display: none;
 }
 .fileSizeText{
-    color: red;
+    color: rgb(135, 54, 54);
 
 }
 .loader{
-    color: white;
+    color: var(--dark-grey);
 }

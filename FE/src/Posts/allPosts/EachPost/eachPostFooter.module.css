@@ -1,5 +1,27 @@
+.postLikesDislikesCommentsNumbers{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    column-gap: 1em;
+}
+.likesIcon{
+    background-color: rgb(41, 135, 208);
+    padding: 3px 4px;
+    border-radius: 20px;
+    z-index: 3;
+    color: rgb(237, 227, 227);
+}
+.dislikesIcon{
+    background-color: rgb(206, 75, 75);
+    padding: 3px 4px;
+    border-radius: 20px;
+    z-index: 3;
+    color: rgb(225, 208, 208);
+}
+
 .FirstRow{
-    background-color: red;
+    border-top: 1px solid var(--light-grey);
+    border-bottom: 1px solid var(--light-grey);
     display: flex;
     justify-content: space-evenly;
     padding: 8px 0;
@@ -8,15 +30,29 @@
     border-radius: 5px;
     font-size: 1em;
     cursor: pointer;
-    color: rgb(20, 65, 148);
+    border: none;
+    color: var(--dark-grey);
+    background-color: var(--white);
+}
+.activityButton:active{
+    background-color: var(--sky-blue);
+}
+.activityButton:disabled{
+    visibility: hidden;
+}
+.LikeText{
+    margin-left: 2px;
 }
 .secondRow{
     display: flex;
-    margin: 5px 10px;
-    height: 2.5em;
+    padding: 8px 0px;
+    padding-bottom: 0;
+    align-items: center;
 }
 .userImage{
     border-radius: 50%;
+    height: 2em;
+    width: 2em;
 }
 .commentForm{
     width: 100%;
@@ -25,5 +61,7 @@
     margin:4px 4px;
     border-radius: 50px;
     width: 98%;
-    padding: 5px 3px;
+    border: none;
+    background-color: var(--light-grey);
+    padding: 9px 8px;
 }

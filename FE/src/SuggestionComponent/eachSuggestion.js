@@ -1,4 +1,4 @@
-import classes from './Suggestions.module.css';
+import classes from './eachSuggestions.module.css';
 import { toast } from "react-toastify";
 import { useState } from 'react';
 import userLogo from '../Assets/Images/userlogo';
@@ -29,18 +29,14 @@ const EachSuggestion = (props) => {
                 props.addFriend(friend)
 
               }
-            console.log(data)
         })
 }
-
-    
-
     return(
         <div className={classes.user}>
-        <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",userLogo)}} alt=""></img>
-        <p  className={classes.userName}>{suggestion.name}</p>
-        {!addFriendBoolean ? <button className={classes.addUserButton} onClick={(event) => addFriendHandler(suggestion)} >Add</button>
-        : <button >Added</button>}
+          <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",userLogo)}} alt=""></img>
+          <p  className={classes.userName}>{suggestion.name}</p>
+          {!addFriendBoolean ? <button className={classes.addUserButton} onClick={(event) => addFriendHandler(suggestion)} >Add</button>
+          : <button >Added</button>}
         </div>
         )
 }

@@ -22,9 +22,9 @@ const MyFriends = (props) => {
         return <Fragment>
             <div>
                 {myFriends.map((friend,index) => {
-                  return <>
-                   <EachFriend key ={index} data={friend} removeFriend={removeFriendHandler} />
-                </>
+                  return <div key ={index} >
+                   <EachFriend data={friend} removeFriend={removeFriendHandler} />
+                </div>
                 })
                 }
             </div>

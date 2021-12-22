@@ -12,5 +12,6 @@ router.post("/getAllPosts", users.getAllPosts);
 router.post("/postReaction",users.postReaction);
 router.post("/postComment",users.postComment);
 router.post("/getPostAllComments",users.getPostAllComments);
+router.post("/getPostLikesDislikesCommentsValues",users.getPostLikesDislikesCommentsValues);
 
 module.exports = router;

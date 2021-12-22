@@ -9,7 +9,9 @@ const postReducer = (state = initialState,action) => {
             console.log(action.payload)
             return {...state, allposts: [...state.allposts, ...action.payload]}
         }
-        case "UPDATE_LIKE_DISLIKE":{
+        case "UPDATE_NEW_POST":{
+            console.log(action.payload);
+            return {...state, allposts: [action.payload, ...state.allposts]}
         }
         case "LOAD_POST_COMMENTS":{
             return {...state, postComments: [...action.payload]}

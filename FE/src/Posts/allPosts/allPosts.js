@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import EachPost from "./EachPost/eactPost";
+import EachPost from "./EachPost/eachPost";
 import axios from "axios";
 import classes from "./allPosts.module.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,9 +61,9 @@ const AllPosts = (props) => {
           >
             {allPostsDataFromRedux.map((post, index) => {
             return (
-              <>
-                <EachPost key={index} post={post} />
-              </>
+              <div key={index}>
+                <EachPost post={post} />
+              </div>
             );
           })}
           </InfiniteScroll>

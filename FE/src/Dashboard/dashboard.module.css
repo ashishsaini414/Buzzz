@@ -1,96 +1,116 @@
+@import url("../Assets/cssVariables/variables.css"); 
 .dashboard{
-    background-color: red;
+    background-color: var(--light-grey);
     position: relative;
+    
 }
 .WebsiteLogo{
-    margin: 5px;
     border-radius: 5px;
 }
 .nav{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(104, 104, 97);
+    background-color: var(--white);
     height: 4em;
+    padding: 0 5px;
+    
 }
 
 .navprofile{
     display: flex;
     height: 3em;
     margin: auto 0px;
+    align-items: center;
 }
 .userImage{
-    border-radius: 5px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
 }
 .userName{
-    padding-left: 10px;
-    color: rgb(225, 217, 222);
+    margin: auto 5px;
+    color: rgb(79, 71, 71);
     height: 1.2em;
     font-size: 1.1em;
     font-weight: bold;
 }
+.logoutLink{
+    border: none;
+    margin: 0px 5px;
+    padding: 8px 5px;
+    background-color: var(--light-grey);
+    cursor: pointer;
+    border-radius: 5px;
+    color: black;
+}
+.logoutLink:active{
+    background-color: rgb(98, 177, 186);
+}
 .middleComponents{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 1em;
+    margin-top: 3em;
+}
+.UserComponent{
+    border: 1px  solid purple;
+    height: 20em;
+    width: 20em;
 }
 
 .posts{
-    background-color: rgb(185, 185, 235);
-    width: 40em;
-    border: 1px solid yellow;
-    /* position: absolute; */
+    width: 38em;
     margin-left: 20em;
 }
 
 .asideComponents{
-    /* width: 14em; */
-    /* position: absolute; */
-    /* right: 0; */
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 50em;
-    /* width: 15em; */    /*THIS WILL HAVE TO UNCOMMMENT INFUTRE FOR ASIDE COMPONENT WIDHT*/
-    /* align-items: flex-end; */
-    /* margin: 0px 25px 0 0; */
-    background-color: rgb(94, 94, 232);
+    justify-content: space-between;
+    height: 45em;
+    width: 12.5em;
 }
 
  .suggestionsComponent{
-    /* border: 1px solid red; */
-    height: 20em;
-    /* width: -em; */
-    background-color: rgb(190, 206, 201);
-    overflow: scroll;
-    margin: 0em 0.5em;
-    border-radius: 5px;
+    padding: 5px;
+
+    background-color: var(--white);
+    border-radius: 8px;
 }
 
 .suggestionHeader{
-    /* text-align: left; */
-    /* margin-left: 2px; */
-    padding: 0.5em 0 ;
-    margin: 0;
-    border-bottom: 1px solid black;
-    /* border: 1px solid red; */
-    /* font-size: 16px; */
+    text-align: left;
+    padding-top: 0.5em ;
+    padding-bottom: 0.2em;
+    margin: 0 1px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.suggestionTitle{
+    font-size: 1em;
+    color: var(--dark-grey);
+}
+.searchIcon{
+    background-color: var(--light-grey);
+    border-radius: 50%;
+    padding: 3px 4px;
+    color: var(--grey);
 }
 .suggestionList{
     margin-top: 5px;
-    /* border: 1px solid blue; */
+    overflow: auto;
+    height: 18em;
 }
-
-
-.logoutLink{
-    border: none;
-    margin: 5px 8px;
-    background-color: rgb(87, 204, 204);
-    cursor: pointer;
+.suggestionList::-webkit-scrollbar{
+    width: 6px;
+}
+.suggestionList::-webkit-scrollbar-thumb{
+    width: 6px;
     border-radius: 5px;
-    color: rgb(245, 245, 245);
+    background-color: var(--grey);
 }
-.logoutLink:active{
-    background-color: rgb(153, 63, 63);
-}
+
+
+
 

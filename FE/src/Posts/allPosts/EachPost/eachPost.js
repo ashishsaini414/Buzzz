@@ -13,15 +13,19 @@ const EachPost = (props) => {
     <>
       <div className={classes.post}>
         <header><EachPostHeader post={post}/></header>
-        <p className={classes.postMessage}>{post.message}</p>
+        <div className={classes.postMessageBox}>
+          <p className={classes.postMessage}>{post.message}</p>
+        </div>
         {post.imagesUrl[0].url !== "" && <div className={classes.postImages}>
         <SimpleImageSlider
-        width={638}
+        width={572}
         height={500}
         images={post.imagesUrl}
         showBullets={true}
         showNavs={true}
+        startIndex={0}
         loop={false}
+        style={{position: "relative"}}
         //styling issue of images in this slider
         />
         </div>}

@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import classes from "./createPost.module.css";
 import { toast } from "react-toastify";
+import {useDispatch, useSelector} from 'react-redux'
 
 const CreatePost = () => {
 
@@ -9,6 +10,9 @@ const CreatePost = () => {
   const [isFileSizeRight, setIsFileSizeRight] = useState(true);
   const [loading, setLoading] = useState(false);
   const [inputText, setInputText] = useState("");
+
+  const dispatch = useDispatch()
+  // const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
 
   const cloudinaryUrl = "https://api.cloudinary.com/v1_1/buzzz-social-site/image/upload";
   const currentUser = sessionStorage.getItem("currentUserUsername");
@@ -55,7 +59,12 @@ const CreatePost = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(postData)
-              }).then(response => response.json()).then(data => {console.log(data); toast.success("Post Uploaded Successfully")}).catch(err => console.log(err))
+              }).then(response => response.json())
+              .then(data => {
+                dispatch({type: "UPDATE_NEW_POST", payload: data}); 
+                console.log(data); 
+                toast.success("Post Uploaded Successfully")})
+              .catch(err => console.log(err))
             setLoading(false)
             setInputText("")
         }
@@ -92,7 +101,7 @@ const CreatePost = () => {
           onChange={(e)=> setInputText(e.target.value)}
         ></input>
         <label htmlFor="postfile" className={classes.fileUploadLabel}>
-          <i className="far fa-images"></i> Photos/Videos
+         <span className={classes.fileUploadIcon}><i className="far fa-images"></i></span> Photos/Videos
         </label>
         <input
           type="file"

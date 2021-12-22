@@ -1,7 +1,9 @@
 .user{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgb(183, 183, 192);
+    padding: 8px 0;
 }
 .user:hover{
     background-color: cadetblue;
@@ -10,29 +12,24 @@
 .user:active{
     cursor: pointer;
 }
-.addUserButton{
-    background-color: rgb(130, 130, 194);
-    border: none;
-    padding: 3px 5px;
-    cursor: pointer;
-}
-.addUser:active{
-    background-color: coral;
-}
 .userImage{
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 50%;
+    margin-left: 5px;
 }
-
-.addUserButton{
+.userName{
+    font-size: 0.8em;
+}
+.removeButton{
     background-color: rgb(114, 202, 191);
     border: none;
     padding: 6px 5px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 11px;
+    margin-right: 5px;
 }
-.addUserButton:active{
+.removeButton:active{
     background-color: rgb(150, 74, 74);
 }

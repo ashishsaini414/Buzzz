@@ -1,22 +1,35 @@
 .PostHeader{
-    border: 1px solid rgb(199, 29, 185);
     display: flex;
     justify-content: space-between;
-    padding: 3px 5px;
+    padding: 3px 0px;
+    align-items: center;
 }
-.userImage{
-    height: 2.5em;
-
-}
-.middlePart{
-    /* background-color: red; */
-    font-size: 10px;
-    margin-left: 10px;
-}
-.startingPart{
+.postDeatils{
     display: flex;
 }
+.postOwnerImage{
+    height: 2.5em;
+    border-radius: 2em;
+    margin: 0 0.2em;
+}
+.middlePart{
+    text-align: left;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.postOwnerName{
+    text-transform: capitalize;
+    color: var(--dark-grey);
+}
+.postCreatedDate{
+    font-size: 0.7em;
+    color: var(--grey);
+}
 .postOptions{
-    /* background-color: red; */
-    float: right;
+    background-color: var(--light-grey);
+    border-radius: 20px;
+    padding: 0.2em;
+    color: var(--dark-grey);
 }
