@@ -7,6 +7,7 @@ const { mongo, Types } = require("mongoose");
 module.exports.getAllSuggestions = async () => {
   try {
     const response = await users.User.find({});
+
     return response;
   } catch (error) {
     return error.message;
@@ -46,25 +47,21 @@ module.exports.getAllFriends = async (loginUser) => {
   }
 };
 
-module.exports.addFriend = async (addFriend) => {
+module.exports.addFriend = async (dataFromClient) => {
+  const { loginUser, friendUser } = dataFromClient;
   try {
-    //find the login user
-    if(!(addFriend.loginUser == addFriend.username)){
-      const loginUser = await users.User.findOne({
-        username: addFriend.loginUser,
-      });
-      //now add the added friend username to loginuser friend array's
-      if (!loginUser.friends.includes(addFriend.username)) {
-        const response = await loginUser.updateOne({
-          $push: { friends: addFriend.username},
-        });
-        return response;
-      } else {
-        return "User already added";
-      }
+ 
+    const loginUserObject = await users.User.findOne({username: loginUser})
+    const friendUserObject = await users.User.findOne({username: friendUser})
+    // console.log("login and frienduser",loginUserObject,friendUserObject)
+    if(!loginUserObject.friends.includes(friendUser) && !friendUserObject.notifications.friendsRequest.includes(loginUser)){
+        const response  = await friendUserObject.updateOne({$push : {"notifications.friendsRequest": loginUser}});
+        const res = await users.User.findOne({username: friendUser})
+        // console.log("output",res)
+        return {user: res, message: "Friend Request Sent"}
     }
     else{
-      return "You can't add Yourself"
+      return "Already Friend"
     }
     
   } catch (error) {
@@ -77,12 +74,27 @@ module.exports.removeFriend = async (removeFriend) => {
     const loginUser = await users.User.findOne({
       username: removeFriend.loginUser,
     });
+    //find the friend user
+    const friendUser = await users.User.findOne({
+      username: removeFriend.username,
+    });
     //now remove the added friend username from loginuser friend array's
     if (loginUser.friends.includes(removeFriend.username)) {
-      const response = await loginUser.updateOne({
+      await loginUser.updateOne({
         $pull: { friends: removeFriend.username },
       });
-      return response;
+      await friendUser.updateOne({
+        $pull: { friends: removeFriend.loginUser },
+      });
+
+      const loginUserResponse = await users.User.findOne({
+        username: removeFriend.loginUser,
+      });
+      //find the friend user
+      const FriendUserResponse = await users.User.findOne({
+        username: removeFriend.username,
+      });
+      return {loginUserResponse, FriendUserResponse};
     } else {
       return "Already removed";
     }
@@ -93,7 +105,7 @@ module.exports.removeFriend = async (removeFriend) => {
 
 module.exports.googleLogin = async (loginData, res) =>{
   const {tokenId, profileObj: { imageUrl}} = loginData;
-  
+
   // console.log(tokenId)
   //step-2: Verify the token ... Reference: https://developers.google.com/identity/sign-in/web/backend-auth
   //google-auh-library will verify that the token receive from client side is same as the token use in backend.
@@ -274,4 +286,49 @@ module.exports.getPostLikesDislikesCommentsValues = async (dataFromClient)=>{
   const totalDislikes = currentPost.postReactions.dislikes.length;
   const totalComments = currentPost.comments.length;
   return {totalLikes,totalDislikes,totalComments};
+}
+
+module.exports.getAllNotifications = async (dataFromClient) => {
+  const { loginUser } = dataFromClient;
+  // console.log("loginuser",loginUser)
+  const AllNotifications = {
+    allFriendRequests : []
+  };
+
+  //find the login user object
+  const loginUserObject = await users.User.findOne({username: loginUser});
+  // console.log(loginUserObject)
+
+  //Get all friends requests notifications
+  for(const key in loginUserObject.notifications.friendsRequest){
+    console.log(loginUserObject.notifications.friendsRequest[key])
+    const result = await users.User.findOne({username: loginUserObject.notifications.friendsRequest[key]});
+    AllNotifications.allFriendRequests.push(result);
+  }
+  // console.log("allnotifications",AllNotifications)
+  return AllNotifications;
+}
+
+module.exports.acceptFriendRequest =async (dataFromClient) => {
+  const { loginUser, friendWhoSentTheFriendRequest : friendUser} = dataFromClient;
+  //loginUser = JO Friend Request accept kr rha hai
+  //friendUser = JISNE Friend Request Beji hai
+  //because this api is for accepting friend request
+  try{
+    const WhoAcceptingTheFriendRequest = await users.User.findOne({username: loginUser});
+    const whoSendTheFriendRequest = await users.User.findOne({username: friendUser})
+  
+    await WhoAcceptingTheFriendRequest.updateOne({$pull : {"notifications.friendsRequest" : friendUser}})
+    await WhoAcceptingTheFriendRequest.updateOne({$push: {friends: friendUser}})
+    await whoSendTheFriendRequest.updateOne({$push:{friends: loginUser}})
+    
+    const loginPerson = await users.User.findOne({username: loginUser});
+    const friendRequestSendPerson = await users.User.findOne({username: friendUser})
+  
+    return {loginPerson, friendRequestSendPerson};
+  }
+  catch(err){
+    return {error: err}
+  }
+  
 }

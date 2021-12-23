@@ -1,9 +1,10 @@
 const initialUsersState = {
     loginUser: {},
     myFriends: [],
-    addFriend: {}
+    addFriend: {},
+    allNotifications : []
 }
-const userReducer = (state = {}, action) => {
+const userReducer = (state = initialUsersState, action) => {
     switch(action.type){
         case "LOGIN_USER" : {
             console.log("test")
@@ -11,6 +12,10 @@ const userReducer = (state = {}, action) => {
         }
         case "ADD_FRIEND": {
             return {...state.addFriend, ...action.payload}
+        }
+        case "ALL_NOTIFICATIONS":{
+            //we will get all the users info. objects who sent the friend request to others
+            return {...state, allNotifications: action.payload}
         }
         default: {
             return state

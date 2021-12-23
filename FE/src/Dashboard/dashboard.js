@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Posts from '../Posts/posts';
 import userLogo from '../Assets/Images/userlogo';
 import UserDashboardComponent from "../UserDashboardComponent";
-
+import NotificationIcon from "./Notifications.js/notifications";
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -40,6 +40,7 @@ const Dashboard = () => {
         <div className={classes.navprofile}>
           <img src={currentUserimageUrl} onError={(e)=> e.target.setAttribute("src",userLogo)} className={classes.userImage} alt=""></img>
           <p className={classes.userName}>{currentUser}</p>
+          <NotificationIcon/>
           <GoogleLogout
             clientId="434076698303-4vqlab3auqoeeclm3tkm2c2ki7cpghvp.apps.googleusercontent.com"
             render={(renderProps) => (

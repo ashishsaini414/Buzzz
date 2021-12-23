@@ -19,6 +19,12 @@ const allUsersSchema = mongoose.Schema({
     friends: {
         type: Array,
         default: []
+    },
+    notifications:{
+        friendsRequest: {
+            type: Array,
+            default: []
+        }
     }
 },{ timestamps: true,versionKey: false })
 

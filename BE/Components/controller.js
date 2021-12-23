@@ -52,5 +52,13 @@ module.exports.getPostLikesDislikesCommentsValues = async(req, res)=>{
     res.send(JSON.stringify(response))
     // console.log(response)
 }
+module.exports.getAllNotifications = async (req, res) => {
+    const response = await users.getAllNotifications(req.body);
+    res.send(response);
+}
+module.exports.acceptFriendRequest = async (req, res)=>{
+    const response = await users.acceptFriendRequest(req.body)
+    res.send(response)
+}
 
 
