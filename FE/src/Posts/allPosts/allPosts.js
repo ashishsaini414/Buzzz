@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const AllPosts = (props) => {
-  const [allPostsState, setAllPostsState] = useState([]);
-  const [loading, setLoading] = useState(false);
+
   const [isNextPageNumber, setIsNextPageNumber] = useState(1)
   const [hasMorePosts, setHasMorePosts] = useState(true)
   const currentUserUsername = sessionStorage.getItem("currentUserUsername");
@@ -16,29 +15,24 @@ const AllPosts = (props) => {
   const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
   console.log(allPostsDataFromRedux)
 
-  if(allPostsState === []){
+  if(allPostsDataFromRedux === []){
     setHasMorePosts(false)
   }
-    useEffect(async () => {
-        setLoading(true);
+    useEffect(() => {
+      async function fetchPosts(){
         const { data } = await axios.post("/getAllPosts", {
         username: currentUserUsername,
         page: isNextPageNumber,
         });
-        setLoading(false);
-        // console.log(data);
         dispatch({type: "ADD_NEW_POSTS", payload: data})
 
         if(data.length === 0){
             setHasMorePosts(false)
         }
-        // setAllPostsState((prevState) => [...prevState, ...data]); //Issue of duplicacy
-        // console.log(allPostsState);
-    }, [isNextPageNumber]);
+      }
+      fetchPosts()
+    }, [isNextPageNumber,currentUserUsername,dispatch]);
 
-  console.log(allPostsState);
-
-  console.log("data")
   const fetchData = () => {
       console.log("test")
       setIsNextPageNumber(prev => prev + 1)
@@ -69,7 +63,6 @@ const AllPosts = (props) => {
           </InfiniteScroll>
           
         </div>
-        {/* {loading && <p>Loading...</p>} */}
       </div>
     </Fragment>
   );

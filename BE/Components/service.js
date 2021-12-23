@@ -1,6 +1,6 @@
 const users = require("./Model");
 const { OAuth2Client } = require("google-auth-library")
-const client = new OAuth2Client("434076698303-4vqlab3auqoeeclm3tkm2c2ki7cpghvp.apps.googleusercontent.com");
+const client = new OAuth2Client("539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.apps.googleusercontent.com");
 const jwt = require("jsonwebtoken");
 const { mongo, Types } = require("mongoose");
 
@@ -93,19 +93,19 @@ module.exports.removeFriend = async (removeFriend) => {
 
 module.exports.googleLogin = async (loginData, res) =>{
   const {tokenId, profileObj: { imageUrl}} = loginData;
-
+  
   // console.log(tokenId)
   //step-2: Verify the token ... Reference: https://developers.google.com/identity/sign-in/web/backend-auth
   //google-auh-library will verify that the token receive from client side is same as the token use in backend.
   try{
    const ticket =  await client.verifyIdToken({
       idToken: tokenId,
-      audience: "434076698303-4vqlab3auqoeeclm3tkm2c2ki7cpghvp.apps.googleusercontent.com"
+      audience: "539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.apps.googleusercontent.com"
     })
    const payload = ticket.getPayload();
    const {email, email_verified, name, given_name, family_name, picture} = payload;
     if(email_verified){
-      await users.User.findOne({email}).exec(async (err,user)=>{
+      await users.User.findOne({username: email}).exec(async (err,user)=>{
         if(err){
           res.send({error: "Error"});
         }
@@ -129,20 +129,20 @@ module.exports.googleLogin = async (loginData, res) =>{
             console.log("create new user")
               const newUser = await new users.User({name, username: email, firstName: given_name, lastName: family_name, imageUrl: picture});
               // console.log(newUser)
-            const new22= await newUser.save((err,data)=>{
+            const new22= await newUser.save((err,user)=>{
                 // console.log(err)
-                // console.log(data)
+                // console.log(user)
                 if(err){
                   res.send(err.message)
                 }
                 else{
                  const token = jwt.sign({username: email },"thisismysecretkey",{ expiresIn: "1d"})
-                 console.log({token,data})
+                //  console.log({token,user})
                 res.cookie("jwt",token,{
                   maxAge: 60000,
                   httpOnly: true
                 })
-                res.send({token, data,isNewUserCreated: true});
+                res.send({token, user,isNewUserCreated: true});
                 }
               })
           }

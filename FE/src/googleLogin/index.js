@@ -5,10 +5,8 @@ import classes from "./index.module.css";
 import { GoogleLogin } from "react-google-login";
 import {useNavigate} from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 
 const Login = () => {
-  const [login, setLogin] = useState({})
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
@@ -20,26 +18,18 @@ const Login = () => {
         body: JSON.stringify(response)
       }).then(res => res.json()).then(data =>{
             console.log(data)
-            // localStorage.remove("currentUser")
             dispatch({type: "LOGIN_USER", payload: data})
             sessionStorage.setItem("currentUser",data.user.name);
             sessionStorage.setItem("imageUrl",data.user.imageUrl);
             sessionStorage.setItem("currentUserUsername",data.user.username)
-            // console.log(localStorage.getItem("currentUser"))
-            // setLogin(prevState => [...prevState,data])
-            // setLogin(data)
       })
-      // console.clear()
-
-      console.log(login)
       navigate("/dashboard");
 
   };
   const failureResponseGoogle = (response) => {
     console.log(response);
-    console.log(login);
   }
-console.log(login)
+
   return (
     <Fragment>
       <div className={classes.loginContainer}>
@@ -47,7 +37,7 @@ console.log(login)
         <h2>Enter your details and Start your journey with us</h2>
         <p>Don't stop until you're proud</p>
         <GoogleLogin
-          clientId="434076698303-4vqlab3auqoeeclm3tkm2c2ki7cpghvp.apps.googleusercontent.com"
+          clientId="539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.apps.googleusercontent.com"
           render={(renderProps) => (
             <button onClick={renderProps.onClick} className={classes.loginLink}>Sign In with google</button>
           )}

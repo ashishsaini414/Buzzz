@@ -8,17 +8,14 @@ import { GoogleLogout} from 'react-google-login';
 import { useNavigate } from "react-router-dom";
 import Posts from '../Posts/posts';
 import userLogo from '../Assets/Images/userlogo';
+import UserDashboardComponent from "../UserDashboardComponent";
 
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  // const [currentUser, setCurrentUser] = useState({})
+
   const [addFriend, setAddFriend] = useState({})
   const user = useSelector((state) => state);
-  // console.clear()
-  // console.log(user) 
-  // console.log("test")
-  // console.log("test")
 
   const currentUser = sessionStorage.getItem("currentUser");
   const currentUserimageUrl = sessionStorage.getItem("imageUrl")
@@ -55,7 +52,10 @@ const Dashboard = () => {
         </div>
       </nav>
      
-      <div className={classes.middleComponents}> 
+      <div className={classes.middleComponents}>
+        <div className={classes.UserComponent}>
+          <UserDashboardComponent/>
+        </div>
         <div className={classes.posts}>
                 <Posts/>
         </div>

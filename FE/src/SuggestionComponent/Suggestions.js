@@ -1,14 +1,11 @@
 import { Fragment, useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector} from 'react-redux';
-import { toast } from "react-toastify";
-import { FaUser} from 'react-icons/fa'
 import EachSuggestion from "./eachSuggestion";
 
 const Suggestions = (props) => {
     const [suggest, setSuggest] = useState([])
     const [addFriendState, setAddFriendState] = useState({})
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+    // const currentUserUsername = sessionStorage.getItem("currentUserUsername");
 
     useEffect(()=>{
         fetch("/getAllSuggestions")

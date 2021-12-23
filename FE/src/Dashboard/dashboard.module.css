@@ -14,14 +14,18 @@
     background-color: var(--white);
     height: 4em;
     padding: 0 5px;
-    
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
 
 .navprofile{
     display: flex;
     height: 3em;
     margin: auto 0px;
-    align-items: center;
+    align-items: center; 
 }
 .userImage{
     border-radius: 50px;
@@ -50,17 +54,18 @@
 .middleComponents{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 3em;
+    margin-top: 10vh;
+    padding-top: 4vh;
 }
 .UserComponent{
-    border: 1px  solid purple;
+    border: 1px  solid rgb(206, 124, 206);
     height: 20em;
     width: 20em;
 }
 
 .posts{
     width: 38em;
-    margin-left: 20em;
+    /* margin-left: 20em; */
 }
 
 .asideComponents{
@@ -69,6 +74,7 @@
     justify-content: space-between;
     height: 45em;
     width: 12.5em;
+  
 }
 
  .suggestionsComponent{

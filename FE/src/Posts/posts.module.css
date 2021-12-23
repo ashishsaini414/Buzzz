@@ -6,8 +6,8 @@
 .allPosts{
     border-radius: 10px;
     overflow: auto;
-    height: 38rem;
-    padding-bottom: 3em;
+    /* height: 38rem; */
+    /* padding-bottom: 3em; */
 }
 .allPosts::-webkit-scrollbar{
     width: 5px;
