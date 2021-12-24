@@ -1,14 +1,20 @@
 import classes from './eachSuggestions.module.css';
 import { toast } from "react-toastify";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import userLogo from '../Assets/Images/userlogo';
 
 
 const EachSuggestion = (props) => {
-    const {suggestion } = props;
-    const [addFriendBoolean, setAddFriendBoolean] = useState(true)
-
+    const { suggestion } = props;
+    console.log("////",suggestion)
+    const [addFriendBoolean, setAddFriendBoolean] = useState(false)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+
+    useEffect(()=>{
+      if(!suggestion.notifications.friendsRequest.includes(currentUserUsername)){
+        setAddFriendBoolean(prevState => !prevState)
+      }
+    },[])
 
     const addFriendHandler = (friend) => {
         fetch("/addFriend",{
@@ -27,7 +33,7 @@ const EachSuggestion = (props) => {
               // }
               // else{
               //   toast.success(`${friend.name} added Successfully `)
-                setAddFriendBoolean(false)
+                setAddFriendBoolean(prevState => !prevState)
               //   props.addFriend(friend)
 
               // }
@@ -38,7 +44,7 @@ const EachSuggestion = (props) => {
           <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",userLogo)}} alt=""></img>
           <p  className={classes.userName}>{suggestion.name}</p>
           {addFriendBoolean ? <button className={classes.addUserButton} onClick={(event) => addFriendHandler(suggestion)} >Add</button>
-          : <button className={classes.addUserButton}>Added</button>}
+          : <button className={classes.addUserButton}>Request Sent</button>}
         </div>
         )
 }

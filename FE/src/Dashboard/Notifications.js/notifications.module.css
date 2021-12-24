@@ -11,8 +11,8 @@
 }
 .notificationList{
     position: absolute;
-    background-color: rgb(223, 76, 76);
-    width: 20rem;
+    background-color: var(--white);
+    width: 20rem; 
     display: flex;
     flex-direction: column;
     margin-top: 13px;

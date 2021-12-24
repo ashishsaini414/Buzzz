@@ -25,16 +25,19 @@ const EachPostFooter = (props) =>{
         }
     },[currentUserUsername])
 
-    useEffect(async ()=>{
-        console.log("test")
-        var postDataForLikes = {postId: post._id}
-        const response = await fetch("/getPostLikesDislikesCommentsValues",{
-            method: "POST",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(postDataForLikes)
-        })
-        const result = await response.json();
-        setTotalLikesDislikesComments(result);
+    useEffect(()=>{
+       async function likesDislikesComments(){
+            var postDataForLikes = {postId: post._id}
+            const response = await fetch("/getPostLikesDislikesCommentsValues",{
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify(postDataForLikes)
+            })
+            const result = await response.json();
+            setTotalLikesDislikesComments(result);
+        }
+        likesDislikesComments();
+        
     },[likeToggle,dislikeToggle,postComment])
     
 
@@ -119,7 +122,7 @@ const EachPostFooter = (props) =>{
             </button>
         </div>
         <div className={classes.secondRow}>
-            <img src={currentUserimageUrl} className={classes.userImage}></img>
+            <img src={currentUserimageUrl} className={classes.userImage} alt=""></img>
             <form onSubmit={commentSubmitHandler} className={classes.commentForm}>
                 <input className={classes.enterCommentField} value={postComment} onChange={(e)=> setPostComment(e.target.value)} placeholder="Write a comment ..."></input>
             </form>
