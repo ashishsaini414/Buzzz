@@ -1,12 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import classes from './eachFriendComponent.module.css';
 import { toast } from 'react-toastify';
-import { useState } from "react";
 import userLogo from '../Assets/Images/userlogo';
 
 const FriendsComponent = (props) => {
   const { data } = props;
 
+    const [isFriendRemoved, setIsFriendRemoved] = useState(false)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
 
     const removeFriendHandler = async (friend)=>{
@@ -21,17 +21,18 @@ const FriendsComponent = (props) => {
               toast.error("Already removed")
             }else{
               toast.success(`${friend.name} removed Successfully `)
-              props.removeFriend(friend)
-              // dispatch({type: "ADD_FRIEND", payload: friend})
             }
-        })
+            setIsFriendRemoved(true)
+        })  
     }
   return (
     <Fragment>
         <div className={classes.user}>
           <img src={data.imageUrl} className={classes.userImage} onError={(e)=> e.target.setAttribute("src", userLogo)} alt="" ></img>
           <p className={classes.userName}>{data.name}</p>
-          <button className={classes.removeButton} onClick={()=> removeFriendHandler(data)} >Remove</button>
+          {!isFriendRemoved ? <button className={classes.removeButton} onClick={()=> removeFriendHandler(data)}>Remove</button> :
+          <button className={classes.removeButton}>Removed</button>}
+          
         </div>
     </Fragment>
   );

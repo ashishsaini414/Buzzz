@@ -1,7 +1,7 @@
 const users = require("./service")
 
 module.exports.getAllSuggestions = async (req, res) => {
-   const response =  await users.getAllSuggestions()
+   const response =  await users.getAllSuggestions(req.body)
     res.send(response)
 }
 module.exports.createUser = async (req, res) => {

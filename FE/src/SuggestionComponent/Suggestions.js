@@ -1,31 +1,32 @@
 import { Fragment, useEffect } from "react";
-import { useState } from "react";
 import EachSuggestion from "./eachSuggestion";
+import { useDispatch, useSelector } from "react-redux";
 
 const Suggestions = (props) => {
-    const [suggest, setSuggest] = useState([])
-    const [addFriendState, setAddFriendState] = useState({})
-    // const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+
+    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+
+    const dispatch = useDispatch();
+    const mySuggestions = useSelector(state => state.users.mySuggestions)
 
     useEffect(()=>{
-        fetch("/getAllSuggestions")
+        fetch("/getAllSuggestions",{
+          method: "POST",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({loginUser: currentUserUsername})
+        })
         .then((res) => res.json())
         .then((data) => {
-
-            setSuggest(data)
+            dispatch({type: "SAVE_ALL_SUGGESTIONS", payload: data})
         })
-    },[addFriendState])
-    const addFriendHandler = (res)=>{
-      console.log(res)
-      props.addFriend(res)
-      setAddFriendState(res)
-    }
+    },[currentUserUsername, dispatch])
+
   return <Fragment>
       <div>
-          {suggest.map((data, index) => {
+          {mySuggestions.map((data, index) => {
               return(
                 <div key={index}>
-                  <EachSuggestion suggestion = {data} addFriend={addFriendHandler}  />
+                  <EachSuggestion suggestion = {data} />
                 </div>
               )
           })}

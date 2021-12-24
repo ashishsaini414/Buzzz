@@ -1,5 +1,4 @@
-import { Fragment, useState } from "react";
-import { useSelector } from "react-redux";
+import { Fragment} from "react";
 import ttnLogo from "../Assets/Images/TTNLogo.jpeg";
 import classes from "./dashboard.module.css";
 import Suggestions from "../SuggestionComponent/Suggestions";
@@ -14,9 +13,6 @@ import NotificationIcon from "./Notifications.js/notifications";
 const Dashboard = () => {
   const navigate = useNavigate()
 
-  const [addFriend, setAddFriend] = useState({})
-  const user = useSelector((state) => state);
-
   const currentUser = sessionStorage.getItem("currentUser");
   const currentUserimageUrl = sessionStorage.getItem("imageUrl")
 
@@ -27,9 +23,6 @@ const Dashboard = () => {
     sessionStorage.removeItem("currentUserUsername")
     sessionStorage.removeItem("imageUrl")
 
-  }
-  const addFriendHandler = (response)=>{
-      setAddFriend(response)
   }
 
   return (
@@ -67,7 +60,7 @@ const Dashboard = () => {
             <span className={classes.searchIcon}><i className="fas fa-search"></i></span>
           </div>
           <div className={classes.suggestionList}>
-              <Suggestions key={Math.random().toString()} addFriend={addFriendHandler}/>
+              <Suggestions key={Math.random().toString()} />
           </div>
         </div>
         <div className={classes.myFriends}>
@@ -77,7 +70,7 @@ const Dashboard = () => {
             <span className={classes.searchIcon}><i className="fas fa-search"></i></span>
           </div>
           <div className={classes.suggestionList}>
-          <MyFriends loginUser={user}  key={Math.random().toString()} addFriend={addFriend}/>
+          <MyFriends key={Math.random().toString()} />
           </div>
           </div>
         </div>

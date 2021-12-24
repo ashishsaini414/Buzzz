@@ -4,11 +4,30 @@ const client = new OAuth2Client("539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.a
 const jwt = require("jsonwebtoken");
 const { mongo, Types } = require("mongoose");
 
-module.exports.getAllSuggestions = async () => {
+module.exports.getAllSuggestions = async (dataFromClient) => {
+  const { loginUser } = dataFromClient;
+  console.log(loginUser)
   try {
-    const response = await users.User.find({});
+    const loginUserObject = await users.User.findOne({username: loginUser}); // 
+    const allUsersArray = await users.User.find({});
+    console.log(loginUserObject)
 
-    return response;
+    const newAllSuggestions = allUsersArray.filter(user => {
+      if(user.username !== loginUserObject.username){
+        if(loginUserObject.friends.length !== 0){
+          for(const key in loginUserObject.friends){
+              if(user.username !== loginUserObject.friends[key]){
+                return user
+              }
+            }
+        }
+        else{
+          return user
+        }
+      }
+    }
+    )
+    return newAllSuggestions;
   } catch (error) {
     return error.message;
   }

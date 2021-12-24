@@ -2,7 +2,7 @@ import AllPosts from "./allPosts/allPosts";
 import CreatePost from "./createPost.js/createPost";
 import classes from "./posts.module.css";
 
-const Posts = (props) => {
+const Posts = () => {
   return (
     <div className={classes.posts}>
       <div className={classes.createPost}>
