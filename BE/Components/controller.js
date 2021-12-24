@@ -60,5 +60,9 @@ module.exports.acceptFriendRequest = async (req, res)=>{
     const response = await users.acceptFriendRequest(req.body)
     res.send(response)
 }
+module.exports.getLoginUserAllInformation = async (req, res) => {
+    const response = await users.getLoginUserAllInformation(req.body);
+    res.send(JSON.stringify(response))
+}
 
 

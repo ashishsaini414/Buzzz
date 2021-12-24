@@ -58,9 +58,9 @@
     padding-top: 4vh;
 }
 .UserComponent{
-    border: 1px  solid rgb(206, 124, 206);
+    /* border: 1px  solid rgb(206, 124, 206); */
     height: 20em;
-    width: 20em;
+    width: 15em;
 }
 
 .posts{

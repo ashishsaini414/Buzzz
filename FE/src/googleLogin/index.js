@@ -17,7 +17,7 @@ const Login = () => {
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(response)
       }).then(res => res.json()).then(data =>{
-            console.log(data)
+            console.log("This is login information",data)
             dispatch({type: "LOGIN_USER", payload: data})
             sessionStorage.setItem("currentUser",data.user.name);
             sessionStorage.setItem("imageUrl",data.user.imageUrl);

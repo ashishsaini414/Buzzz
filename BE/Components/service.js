@@ -170,7 +170,7 @@ module.exports.googleLogin = async (loginData, res) =>{
                  const token = jwt.sign({username: email },"thisismysecretkey",{ expiresIn: "1d"})
                 //  console.log({token,user})
                 res.cookie("jwt",token,{
-                  maxAge: 60000,
+                  maxAge: 3600000,
                   httpOnly: true
                 })
                 res.send({token, user,isNewUserCreated: true});
@@ -350,4 +350,12 @@ module.exports.acceptFriendRequest =async (dataFromClient) => {
     return {error: err}
   }
   
+}
+module.exports.getLoginUserAllInformation = async (dataFromClient) => {
+  const { loginUser } = dataFromClient;
+
+  const loginUserObject = await users.User.findOne({username: loginUser});
+  const postCounts = await users.Posts.find({"user.username": loginUser}).count();
+  console.log(loginUserObject, postCounts)
+  return {loginUserObject,postCounts};
 }

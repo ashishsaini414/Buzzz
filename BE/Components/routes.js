@@ -15,5 +15,6 @@ router.post("/getPostAllComments",users.getPostAllComments);
 router.post("/getPostLikesDislikesCommentsValues",users.getPostLikesDislikesCommentsValues);
 router.post("/getAllNotifications",users.getAllNotifications);
 router.post("/acceptFriendRequest",users.acceptFriendRequest);
+router.post("/getLoginUserAllInformation",users.getLoginUserAllInformation)
 
 module.exports = router;
