@@ -1,0 +1,39 @@
+.suggestionsComponent{
+    padding: 5px;
+
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
+.suggestionHeader{
+    text-align: left;
+    padding-top: 0.5em ;
+    padding-bottom: 0.2em;
+    margin: 0 1px ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.suggestionTitle{
+    font-size: 1em;
+    color: var(--dark-grey);
+}
+.searchIcon{
+    background-color: var(--light-grey);
+    border-radius: 50%;
+    padding: 3px 4px;
+    color: var(--grey);
+}
+.suggestionList{
+    margin-top: 5px;
+    overflow: auto;
+    height: 18em;
+}
+.suggestionList::-webkit-scrollbar{
+    width: 6px;
+}
+.suggestionList::-webkit-scrollbar-thumb{
+    width: 6px;
+    border-radius: 5px;
+    background-color: var(--grey);
+}

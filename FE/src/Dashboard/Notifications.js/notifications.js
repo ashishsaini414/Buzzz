@@ -23,7 +23,7 @@ const NotificationIcon = () => {
               dispatch({type: "ALL_NOTIFICATIONS", payload: result})
             }
             getAllNotifications();
-        },[currentUserUsername])
+        },[currentUserUsername, dispatch])
 
     const notificationHandler = () => {
         setShowNotificationPanel(prevState => !prevState)

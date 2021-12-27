@@ -16,6 +16,9 @@ const allUsersSchema = mongoose.Schema({
     imageUrl:{
         type: String, default: ""
     },
+    coverImageUrl :{
+        type: String, default: ""
+    },
     friends: {
         type: Array,
         default: []

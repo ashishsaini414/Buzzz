@@ -64,5 +64,13 @@ module.exports.getLoginUserAllInformation = async (req, res) => {
     const response = await users.getLoginUserAllInformation(req.body);
     res.send(JSON.stringify(response))
 }
+module.exports.getProfileData = async (req, res) => {
+    const response = await users.getProfileData(req.body);
+    res.send(JSON.stringify(response));
+}
+module.exports.updateProfileData = async (req, res) => {
+    const response =  await users.updateProfileData(req.body);
+    res.send(JSON.stringify(response));
+}
 
 

@@ -1,11 +1,13 @@
 import classes from './eachSuggestions.module.css';
 import { useEffect, useState } from 'react';
 import userLogo from '../Assets/Images/userlogo';
+import { useNavigate } from 'react-router-dom';
 
 
 const EachSuggestion = (props) => {
 
     const { suggestion } = props;
+    const navigate = useNavigate();
     const [addFriendBoolean, setAddFriendBoolean] = useState(false)
     const currentUserUsername = sessionStorage.getItem("currentUserUsername");
 
@@ -28,7 +30,7 @@ const EachSuggestion = (props) => {
     return(
         <div className={classes.user}>
           <img src={suggestion.imageUrl} className={classes.userImage} onError={(e)=> { e.target.setAttribute("src",userLogo)}} alt=""></img>
-          <p  className={classes.userName}>{suggestion.name}</p>
+          <p  className={classes.userName} onClick={()=> navigate(`/profile/${suggestion.username}`)}>{suggestion.name}</p>
           {addFriendBoolean ? <button className={classes.addUserButton} onClick={(event) => addFriendHandler(suggestion)} >Add</button>
           : <button className={classes.addUserButton}>Request Sent</button>}
         </div>

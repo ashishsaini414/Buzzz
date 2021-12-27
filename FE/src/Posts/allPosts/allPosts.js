@@ -34,7 +34,6 @@ const AllPosts = (props) => {
     }, [isNextPageNumber,currentUserUsername,dispatch]);
 
   const fetchData = () => {
-      console.log("test")
       setIsNextPageNumber(prev => prev + 1)
   }
  

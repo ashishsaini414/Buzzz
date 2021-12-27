@@ -359,3 +359,30 @@ module.exports.getLoginUserAllInformation = async (dataFromClient) => {
   console.log(loginUserObject, postCounts)
   return {loginUserObject,postCounts};
 }
+module.exports.getProfileData = async (dataFromClient) => {
+  const { profileUserUsername, loginUserUsername } = dataFromClient;
+  console.log(profileUserUsername)
+  const userObject = await users.User.findOne({username : profileUserUsername})
+  if(profileUserUsername === loginUserUsername){
+    return {userObject , isAccountOwner: true};
+  }
+  else{
+    return {userObject , isAccountOwner: false};
+  }
+}
+
+module.exports.updateProfileData = async (dataFromClient)=>{
+  const {loginUser , coverImageLink, task} = dataFromClient;
+  console.log(loginUser, coverImageLink, task);
+  //for cover image
+  if(task === "coverImageUpload"){
+    const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {coverImageUrl : coverImageLink}},{new: true})
+    console.log(result)
+    return {coverImageLink: result.coverImageUrl};
+  }
+  if(task ==="profileImageUpload"){
+    const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {imageUrl : coverImageLink}},{new: true})
+    return {profileImageLink: result.imageUrl}
+  }
+  
+}

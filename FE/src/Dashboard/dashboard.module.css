@@ -2,54 +2,9 @@
 .dashboard{
     background-color: var(--light-grey);
     position: relative;
-    
 }
 .WebsiteLogo{
     border-radius: 5px;
-}
-.nav{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: var(--white);
-    height: 4em;
-    padding: 0 5px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-.navprofile{
-    display: flex;
-    height: 3em;
-    margin: auto 0px;
-    align-items: center; 
-}
-.userImage{
-    border-radius: 50px;
-    width: 40px;
-    height: 40px;
-}
-.userName{
-    margin: auto 5px;
-    color: rgb(79, 71, 71);
-    height: 1.2em;
-    font-size: 1.1em;
-    font-weight: bold;
-}
-.logoutLink{
-    border: none;
-    margin: 0px 5px;
-    padding: 8px 5px;
-    background-color: var(--light-grey);
-    cursor: pointer;
-    border-radius: 5px;
-    color: black;
-}
-.logoutLink:active{
-    background-color: rgb(98, 177, 186);
 }
 .middleComponents{
     display: flex;
@@ -58,14 +13,12 @@
     padding-top: 4vh;
 }
 .UserComponent{
-    /* border: 1px  solid rgb(206, 124, 206); */
     height: 20em;
     width: 15em;
 }
 
 .posts{
     width: 38em;
-    /* margin-left: 20em; */
 }
 
 .asideComponents{
@@ -74,47 +27,6 @@
     justify-content: space-between;
     height: 45em;
     width: 12.5em;
-  
-}
-
- .suggestionsComponent{
-    padding: 5px;
-
-    background-color: var(--white);
-    border-radius: 8px;
-}
-
-.suggestionHeader{
-    text-align: left;
-    padding-top: 0.5em ;
-    padding-bottom: 0.2em;
-    margin: 0 1px ;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.suggestionTitle{
-    font-size: 1em;
-    color: var(--dark-grey);
-}
-.searchIcon{
-    background-color: var(--light-grey);
-    border-radius: 50%;
-    padding: 3px 4px;
-    color: var(--grey);
-}
-.suggestionList{
-    margin-top: 5px;
-    overflow: auto;
-    height: 18em;
-}
-.suggestionList::-webkit-scrollbar{
-    width: 6px;
-}
-.suggestionList::-webkit-scrollbar-thumb{
-    width: 6px;
-    border-radius: 5px;
-    background-color: var(--grey);
 }
 
 

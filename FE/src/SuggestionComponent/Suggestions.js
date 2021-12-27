@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import EachSuggestion from "./eachSuggestion";
 import { useDispatch, useSelector } from "react-redux";
+import classes from './suggestions.module.css';
 
 const Suggestions = (props) => {
 
@@ -22,7 +23,12 @@ const Suggestions = (props) => {
     },[currentUserUsername, dispatch])
 
   return <Fragment>
-      <div>
+      <div className={classes.suggestionsComponent}>
+          <div className={classes.suggestionHeader}>
+            <h2 className={classes.suggestionTitle}>Suggestions</h2>
+            <span className={classes.searchIcon}><i className="fas fa-search"></i></span>
+          </div>
+          <div className={classes.suggestionList}>
           {mySuggestions.map((data, index) => {
               return(
                 <div key={index}>
@@ -30,6 +36,7 @@ const Suggestions = (props) => {
                 </div>
               )
           })}
+          </div>      
       </div>
   </Fragment>
 };

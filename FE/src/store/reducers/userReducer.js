@@ -1,7 +1,5 @@
 const initialUsersState = {
-    loginUser: {},
     mySuggestions: [],
-    myFriends: [],
     allFriends: [],
     allNotifications : [],
     loginUserInfo: {}

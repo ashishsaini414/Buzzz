@@ -23,7 +23,7 @@ const EachPostFooter = (props) =>{
         if(post.postReactions.dislikes.includes(currentUserUsername)){
             setDisLikeToggle(prevState => !prevState)
         }
-    },[currentUserUsername])
+    },[currentUserUsername, post.postReactions.likes,post.postReactions.dislikes ])
 
     useEffect(()=>{
        async function likesDislikesComments(){
@@ -38,7 +38,7 @@ const EachPostFooter = (props) =>{
         }
         likesDislikesComments();
         
-    },[likeToggle,dislikeToggle,postComment])
+    },[likeToggle,dislikeToggle,postComment, post])
     
 
     const likeButtonHandler = async (likePost, condition) => {

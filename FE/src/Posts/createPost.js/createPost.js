@@ -1,7 +1,7 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import classes from "./createPost.module.css";
 import { toast } from "react-toastify";
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 const CreatePost = () => {
 
@@ -91,7 +91,7 @@ const CreatePost = () => {
 
   return (
     <div className={classes.CreatePost}>
-      <img src={currentUserimageUrl} className={classes.userImage}></img>
+      <img src={currentUserimageUrl} className={classes.userImage} alt=""></img>
       <form onSubmit={postSubmitHandler} className={classes.postForm}>
         <input
           type="text"
