@@ -328,7 +328,7 @@ module.exports.getAllNotifications = async (dataFromClient) => {
   return AllNotifications;
 }
 
-module.exports.acceptFriendRequest =async (dataFromClient) => {
+module.exports.acceptFriendRequest = async (dataFromClient) => {
   const { loginUser, friendWhoSentTheFriendRequest : friendUser} = dataFromClient;
   //loginUser = JO Friend Request accept kr rha hai
   //friendUser = JISNE Friend Request Beji hai
@@ -372,17 +372,36 @@ module.exports.getProfileData = async (dataFromClient) => {
 }
 
 module.exports.updateProfileData = async (dataFromClient)=>{
-  const {loginUser , coverImageLink, task} = dataFromClient;
-  console.log(loginUser, coverImageLink, task);
+  const {loginUser , coverImageLink, task, data} = dataFromClient;
+  console.log(loginUser, coverImageLink, task, data);
   //for cover image
   if(task === "coverImageUpload"){
     const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {coverImageUrl : coverImageLink}},{new: true})
     console.log(result)
     return {coverImageLink: result.coverImageUrl};
   }
-  if(task ==="profileImageUpload"){
+  //for profile image
+  if(task === "profileImageUpload"){
     const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {imageUrl : coverImageLink}},{new: true})
     return {profileImageLink: result.imageUrl}
+  }
+  //for profile data updation
+
+  if(task === "profileDataUpdate"){
+    const response = await users.User.findOne({username: loginUser});
+    const result = await users.User.findOneAndUpdate({username: loginUser},{$set:{
+      firstName: data.inputFirstName,
+      lastName: data.inputLastName,
+      name: data.inputFirstName+" "+ data.inputLastName,
+      "otherInformation.designation": data.inputDesignation,
+      "otherInformation.website": data.inputWebsite,
+      "otherInformation.gender": data.inputGender,
+      "otherInformation.birthday": data.inputBirthday,
+      "otherInformation.address.city": data.inputCity,
+      "otherInformation.address.state": data.inputState,
+      "otherInformation.address.zip": data.inputZip
+    }},{new: true})
+    return result;
   }
   
 }

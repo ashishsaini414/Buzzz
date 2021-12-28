@@ -13,7 +13,7 @@ const EachSuggestion = (props) => {
 
     useEffect(()=>{
       if(!suggestion.notifications.friendsRequest.includes(currentUserUsername)){
-        setAddFriendBoolean(prevState => !prevState)
+        setAddFriendBoolean(true)
       }
     },[suggestion.notifications.friendsRequest, currentUserUsername])
 

@@ -12,7 +12,7 @@
 }
 .userCoverImage{
     height: 20vh;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 .coverImagesElements{
     /* display: flex; */
@@ -55,6 +55,7 @@
 .userProfileImage{
     height: inherit;
     width: inherit;
+    border-radius: 5px;
     background-color: red;
 }
 
@@ -137,6 +138,7 @@
     background-color: skyblue;
     padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 

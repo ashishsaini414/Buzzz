@@ -1,14 +1,47 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import userLogo from "../../Assets/Images/userlogo";
 import classes from "./index.module.css";
 
 const OtherUserProfile = (props) => {
   const { getProfileData } = props;
+  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+
+  console.log("nameis",getProfileData) 
+
+  const [addFriendBoolean, setAddFriendBoolean] = useState(false)
+  const [alreadyFriend, setAlreadyFriend] = useState(false)
+  const designation = getProfileData.userObject.otherInformation.designation;
+  const city = getProfileData.userObject.otherInformation.address.city;
+  const state = getProfileData.userObject.otherInformation.address.state;
+  const zip = getProfileData.userObject.otherInformation.address.zip;
+
+
+  useEffect(()=>{
+    if(getProfileData.userObject.notifications.friendsRequest.includes(currentUserUsername)){
+      setAddFriendBoolean(true)
+    }
+    if(getProfileData.userObject.friends.includes(currentUserUsername)){
+      setAlreadyFriend(true)
+    }
+  },[getProfileData, currentUserUsername])
+
+  console.log(alreadyFriend,addFriendBoolean)
+
+  const addFriendHandler = (friend) => {
+    fetch("/addFriend",{
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify({loginUser: currentUserUsername, friendUser:friend.username})
+    }).then(res => res.json()).then(data => {
+      console.log(data)
+      setAddFriendBoolean(prevState => !prevState)
+    })
+  } 
   return (
     <Fragment>
       <div className={classes.loginUserInformation}>
         <div className={classes.userCoverImage}>
-          <img src={getProfileData.userObject.coverImage} alt=""></img>
+          <img src={getProfileData.userObject.coverImageUrl} className={classes.coverImageUrl} alt=""></img>
         </div>
         <div className={classes.OtherUserInformation}>
         <div>
@@ -21,14 +54,16 @@ const OtherUserProfile = (props) => {
         </div>
         <p className={classes.userName}>{getProfileData.userObject.name}</p>
         <div className={classes.userDetails}>
-          <p>This is about the ashish</p>
-          <span>Roorkee,uttarakhand *</span>
+         {designation !== "" && <p>{designation}</p>}
+          { city !== "" && <span>{`${city} *`}</span>}
+          { city !== "" && <span>{`${state} *`}</span>}
+          { city !== "" && <span>{`${zip} | `}</span>}
           <span>{`${getProfileData.userObject.friends.length} friends`}</span>
         </div>
         <div>
-          <button name="addFriend" className={classes.addFriendButton}>
+          {!alreadyFriend ? !addFriendBoolean ? <button name="addFriend" className={classes.addFriendButton} onClick={() => addFriendHandler(getProfileData.userObject)}>
             <i class="fas fa-user-plus"></i> Add Friend
-          </button>
+          </button> :  <button className={classes.requestSentButton}>Request Sent</button> : <button className={classes.alreadyFriendButton}>Already Friend</button>}
           <a
             href="https://www.google.com/"
             target="_blank"

@@ -6,11 +6,28 @@ import axios from "axios";
 import OtherUserProfile from "./OtherUserProfile";
 
 const EachProfilePage = () => {
+
   const [getProfileData, setGetProfileData] = useState({
     userObject:{
-      friends: []
+      friends: [],
+      name:"",
+      notifications:{
+        friendsRequest: ["ashish"],
+      },
+      otherInformation:{
+        address:{
+          city:"",
+          state: "",
+          zip: null
+        },
+        birthday: "",
+        designation: "",
+        gender: "",
+        website: ""
+      }
     }
   });
+  
   const params = useParams();
 
   const currentUserUsername = sessionStorage.getItem("currentUserUsername");
@@ -25,7 +42,7 @@ const EachProfilePage = () => {
       setGetProfileData(data);
     }
     getProfileData();
-  }, [params]);
+  }, [params, currentUserUsername]);
 
   console.log(getProfileData);
 

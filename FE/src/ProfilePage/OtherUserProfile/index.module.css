@@ -1,19 +1,15 @@
 .loginUserInformation > * {
     text-align: left;
     display: block;
-    /* margin: 0.8em 0; */
-    /* margin-left: 1em; */
+    width: 75vw;
 }
 .userCoverImage{
     height: 20vh;
-    width: 75vw;
-    border: 1px solid red;
+    width: 100%;
 }
-.coverImagesElements{
-    display: flex;
-    flex-direction: column;
-    margin: 3em auto;
-    height: 1em;
+.coverImageUrl{
+    height: inherit;
+    width: inherit;
 }
 .OtherUserInformation{
     margin: 0 1em;
@@ -25,9 +21,10 @@
 }
 
 .userProfileImage{
-    height: 6em;
+    height: 8em;
+    width: 8rem;
     background-color: var(--light-grey);
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .profileImageEdit{
@@ -51,6 +48,21 @@
     padding: 1em 3em;
     background-color: var(--sky-blue);
     border-radius: 5px;
+    font-size: 1em;
+}
+.requestSentButton{
+    border: none;
+    padding: 1em 3em;
+    background-color: plum;
+    border-radius: 5px;
+    font-size: 1em;
+}
+.alreadyFriendButton{
+    border: none;
+    padding: 1em 3em;
+    background-color: var(--grey);
+    border-radius: 5px;
+    color: white;
     font-size: 1em;
 }
 .VisitWebsiteLink{
