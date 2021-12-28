@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
-import userLogo from "../../Assets/Images/userlogo";
+import userLogo from "../../Assets/Images/user_logo.jpg";
 import classes from "./index.module.css";
+import SampleCoverImage from '../../Assets/Images/blank_wallpaper.jpg'
 
 const OtherUserProfile = (props) => {
   const { getProfileData } = props;
@@ -41,7 +42,7 @@ const OtherUserProfile = (props) => {
     <Fragment>
       <div className={classes.loginUserInformation}>
         <div className={classes.userCoverImage}>
-          <img src={getProfileData.userObject.coverImageUrl} className={classes.coverImageUrl} alt=""></img>
+          <img src={getProfileData.userObject.coverImageUrl} className={classes.coverImageUrl} alt="" onError={(e)=> e.target.setAttribute("src",SampleCoverImage)}></img>
         </div>
         <div className={classes.OtherUserInformation}>
         <div>

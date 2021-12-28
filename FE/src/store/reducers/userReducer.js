@@ -2,7 +2,11 @@ const initialUsersState = {
     mySuggestions: [],
     allFriends: [],
     allNotifications : [],
-    loginUserInfo: {}
+    loginUserInfo: {
+        loginUserObject:{
+            coverImageUrl: ""
+        }
+    }
 }
 const userReducer = (state = initialUsersState, action) => {
     switch(action.type){

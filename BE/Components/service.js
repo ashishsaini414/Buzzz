@@ -357,7 +357,8 @@ module.exports.getLoginUserAllInformation = async (dataFromClient) => {
   const loginUserObject = await users.User.findOne({username: loginUser});
   const postCounts = await users.Posts.find({"user.username": loginUser}).count();
   console.log(loginUserObject, postCounts)
-  return {loginUserObject,postCounts};
+  const profileViews = loginUserObject.otherInformation.totalProfileViews;
+  return {loginUserObject,postCounts,profileViews};
 }
 module.exports.getProfileData = async (dataFromClient) => {
   const { profileUserUsername, loginUserUsername } = dataFromClient;
@@ -367,6 +368,7 @@ module.exports.getProfileData = async (dataFromClient) => {
     return {userObject , isAccountOwner: true};
   }
   else{
+    await users.User.findOneAndUpdate({username : loginUserUsername},{$inc : {"otherInformation.totalProfileViews": 1}},{new: true});
     return {userObject , isAccountOwner: false};
   }
 }

@@ -43,6 +43,10 @@ const allUsersSchema = mongoose.Schema(
         type: String,
         default: "",
       },
+      totalProfileViews: {
+        type: Number,
+        default: 0
+      },
       address: {
         city: {
           type: String,
@@ -55,7 +59,7 @@ const allUsersSchema = mongoose.Schema(
         zip: {
           type: Number,
           default: null,
-        },
+        }
       },
     },
     friends: {
