@@ -104,6 +104,10 @@ const postsSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    reports:{
+      type: Array,
+      default : []
+    }
   },
   { timestamps: true, minimize: false, versionKey: false }
 );

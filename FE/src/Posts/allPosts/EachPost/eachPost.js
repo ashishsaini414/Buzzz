@@ -6,13 +6,13 @@ import EachPostFooter from "./eachPostFooter";
 
 
 const EachPost = (props) => {
-  const { post } = props;
+  const { post, moderatorMode } = props;
   // console.log(post);
   
   return (
     <>
       <div className={classes.post}>
-        <header><EachPostHeader post={post}/></header>
+        <header><EachPostHeader post={post} moderatorMode={moderatorMode}/></header>
         <div className={classes.postMessageBox}>
           <p className={classes.postMessage}>{post.message}</p>
         </div>

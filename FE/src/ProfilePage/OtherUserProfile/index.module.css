@@ -49,6 +49,7 @@
     background-color: var(--sky-blue);
     border-radius: 5px;
     font-size: 1em;
+    cursor: pointer;
 }
 .requestSentButton{
     border: none;

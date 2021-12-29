@@ -1,21 +1,7 @@
 .createPost{
-    margin-bottom: 20px;
     border-radius: 5px;
     background-color: var(--white);
 }
 .allPosts{
-    border-radius: 10px;
-    overflow: auto;
-    /* height: 38rem; */
-    /* padding-bottom: 3em; */
-}
-.allPosts::-webkit-scrollbar{
-    width: 5px;
-}
-.allPosts::-webkit-scrollbar-track{
-    padding-top: 3px;
-}
-.allPosts::-webkit-scrollbar-thumb{
-    background-color: var(--grey);
     border-radius: 10px;
 }

@@ -18,5 +18,8 @@ router.post("/acceptFriendRequest",users.acceptFriendRequest);
 router.post("/getLoginUserAllInformation",users.getLoginUserAllInformation);
 router.post("/getProfileData",users.getProfileData)
 router.post("/updateProfileData",users.updateProfileData);
+router.post("/reportPost",users.reportPost)
+router.post("/getAllReportedPosts",users.getAllReportedPosts);
+router.delete("/deletePost",users.deletePost)
 
 module.exports = router;

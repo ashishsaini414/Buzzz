@@ -407,3 +407,31 @@ module.exports.updateProfileData = async (dataFromClient)=>{
   }
   
 }
+
+module.exports.reportPost = async (dataFromClient) => {
+  const { loginUser, reportedPostId } = dataFromClient;
+  const result = await users.Posts.findById(reportedPostId)
+  await result.updateOne({$push: {reports: loginUser}})
+  const result2 = await users.Posts.findById(reportedPostId)
+
+  return result2
+}
+
+module.exports.getAllReportedPosts = async (dataFromClient) => {
+  const { page } = dataFromClient;
+  const integerNumberOfPage = parseInt(page)
+  const limit = 3;
+  const firstIndex = (integerNumberOfPage-1)*limit;
+  const lastIndex = integerNumberOfPage*limit;
+  
+  const allReportedPosts = await users.Posts.find({"reports.0" : { $exists : true } })
+  const returningAllReportedPosts = allReportedPosts.slice(firstIndex,lastIndex)
+
+  return returningAllReportedPosts;
+}
+
+module.exports.deletePost = async (dataFromClient) => {
+  const { postId } = dataFromClient;
+  const deletedPost = await users.Posts.findByIdAndDelete(postId);
+  return deletedPost;
+}

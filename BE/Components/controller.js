@@ -72,5 +72,18 @@ module.exports.updateProfileData = async (req, res) => {
     const response =  await users.updateProfileData(req.body);
     res.send(JSON.stringify(response));
 }
+module.exports.reportPost = async (req, res) => {
+    const response = await users.reportPost(req.body);
+    res.send(JSON.stringify(response));
+}
+module.exports.getAllReportedPosts = async (req, res) => {
+    const response  = await users.getAllReportedPosts(req.body);
+    res.send(JSON.stringify(response));
+}   
+module.exports.deletePost = async (req, res) => {
+    console.log(req.body)
+    const response = await users.deletePost(req.body);
+    res.send(JSON.stringify(response));
+}
 
 
