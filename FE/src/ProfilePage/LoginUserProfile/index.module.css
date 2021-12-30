@@ -2,24 +2,24 @@
     text-align: left;
     display: block;
     width: 75vw;
-    /* margin: 0.8em 0; */
-    /* margin-left: 1em; */
 }
 .loginUserInformation > *:first-child {
-    /* margin-top: -3em; */
-    background-color: blue;
-    /* margin-bottom: 0px; */
+    background-color: var(--grey);
+    color: var(--white);
 }
 .userCoverImage{
     height: 20vh;
-    /* border: 1px solid red; */
 }
 .coverImagesElements{
-    /* display: flex; */
-    /* flex-direction: column; */
-    margin: 3em auto;
+    display: flex;
+    flex-direction: column;
+    /* margin: 3em auto; */
+
     text-align: center;
     /* height: 1em; */
+}
+.coverImagesElements > *:first-child{
+    margin: 2.8em auto;
 }
 .coverImageLink{
     height: inherit;
@@ -49,7 +49,7 @@
 .profileImageBox{
     height: 8rem;
     width: 8rem;
-    background-color: red;
+    background-color: var(--white);
     display: inline-flex;
     border-radius: 5px;
 }
@@ -57,7 +57,7 @@
     height: inherit;
     width: inherit;
     border-radius: 5px;
-    background-color: red;
+    background-color: var(--white);
 }
 
 .profileImageEdit{

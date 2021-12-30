@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import classes from "./createPost.module.css";
 import { toast } from "react-toastify";
 import {useDispatch} from 'react-redux'
+import Loader from "../../Assets/Loader/loader";
 
 const CreatePost = () => {
 
@@ -90,6 +91,7 @@ const CreatePost = () => {
   };
 
   return (
+    <Fragment>
     <div className={classes.CreatePost}>
       <img src={currentUserimageUrl} className={classes.userImage} alt=""></img>
       <form onSubmit={postSubmitHandler} className={classes.postForm}>
@@ -111,9 +113,10 @@ const CreatePost = () => {
           onChange={(e) => fileUploadHandler(e)}
         ></input>
         {!isFileSizeRight ? <p className={classes.fileSizeText}>File must be less than 300kb </p> : "" }
-        {loading ? <p className={classes.loader}>Uploading...</p> : ""}
       </form>
     </div>
+    {loading && <Loader/>}
+    </Fragment>
   );
 };
 export default CreatePost;

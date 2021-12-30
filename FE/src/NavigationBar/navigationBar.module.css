@@ -35,6 +35,11 @@
     font-weight: bold;
     cursor: pointer;
 }
+.userName:active{
+    background-color: grey;
+    height: inherit;
+    padding-top: 13px;
+}
 .logoutLink{
     border: none;
     margin: 0px 5px;

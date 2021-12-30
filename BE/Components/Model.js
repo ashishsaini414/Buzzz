@@ -62,6 +62,18 @@ const allUsersSchema = mongoose.Schema(
         }
       },
     },
+    groups:{
+      type: Array,
+      default: []
+    },
+    recents: {
+      type: Array,
+      default: []
+    },
+    subscriptions:{
+      type: Array,
+      default: []
+    },
     friends: {
       type: Array,
       default: [],

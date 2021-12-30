@@ -15,6 +15,11 @@
     width: 20rem; 
     display: flex;
     flex-direction: column;
-    margin-top: 13px;
+    margin-top: 1.6em;
+    border-radius: 5px;
     transform: translateX(-17.8em);
+}
+.noNotificationsMessage{
+    color: var(--dark-grey);
+    padding: 10px 0;
 }

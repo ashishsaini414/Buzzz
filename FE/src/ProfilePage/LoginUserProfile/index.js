@@ -1,7 +1,9 @@
 import axios from "axios";
 import { Fragment, useState, useRef } from "react";
+import { toast } from "react-toastify";
 import classes from "./index.module.css";
 import ProfileForm from "./ProfileForm/profileForm";
+import Loader from "../../Assets/Loader/loader";
 
 const LoginUserProfile = (props) => {
   const { getProfileData } = props;
@@ -51,13 +53,14 @@ const LoginUserProfile = (props) => {
       task,
     });
     console.log(data);
+    toast.success(`Image Uploaded Successfully`)
     // setCoverImageLink(data.coverImageLink)
     setLoading(false);
   };
 
   return (
     <Fragment>
-      {loading ? <p>Loading</p> : ""}
+      {loading ? <Loader/> : ""}
       <div className={classes.loginUserInformation}>
         <div className={classes.userCoverImage}>
           {getProfileData.userObject.coverImageUrl === "" ? (

@@ -101,7 +101,12 @@ const EachPostFooter = (props) =>{
                 <p className={classes.totalLikes}><span className={classes.likesIcon}><i className="far fa-thumbs-up"></i></span> {totalLikesDislikesComments.totalLikes}</p>
                 <p className={classes.totalDislikes}><span className={classes.dislikesIcon}><i className="far fa-thumbs-down"></i></span> {totalLikesDislikesComments.totalDislikes}</p>
             </div>
-            <p className={classes.totalComments}>{`${totalLikesDislikesComments.totalComments} comments`}</p>
+            <p className={classes.totalComments}>
+                {`${totalLikesDislikesComments.totalComments}
+                  ${totalLikesDislikesComments.totalComments === 1 || totalLikesDislikesComments.totalComments === 0 ? 
+                  `comment`: `comments`}`
+                }
+            </p>
         </div>
         <div className={classes.FirstRow}>
             {!likeToggle ? <button id={classes.likeButton} disabled={dislikeToggle} className={classes.activityButton} onClick={()=>likeButtonHandler(post,"like")}>

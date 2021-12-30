@@ -5,6 +5,7 @@ import classes from "./allPosts.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Moderator from "../../Moderator";
+import Loader from "../../Assets/Loader/loader";
 
 const AllPosts = (props) => {
 
@@ -109,9 +110,9 @@ const AllPosts = (props) => {
             dataLength={ isModeratorModeON ? allReportedPostsDataFromRedux.length : allPostsDataFromRedux.length } //This is important field to render the next data
             next={fetchData}
             hasMore={hasMorePosts}
-            loader={<h4>Loading...</h4>}
+            loader={<p className={classes.loader}><Loader/></p>}
             endMessage={
-              <p style={{ textAlign: "center" }}>
+              <p className={classes.endMessage}>
                 <b>Yay! You have seen it all</b>
               </p>
             }

@@ -23,13 +23,9 @@ const UserDashboardComponent = () => {
         getLoginUserInfo();
     },[currentUserUsername, dispatch])
     
-    return <div>
-        <div className={classes.topComponent}>
+    return <div className={classes.userDashboardComponent}>
             <TopComponent/>
-        </div>
-        <div className={classes.bottomComponent}>
             <BottomComponent/>
-        </div>
     </div>
 }
 

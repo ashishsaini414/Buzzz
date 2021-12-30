@@ -35,7 +35,8 @@ const NotificationIcon = () => {
       {showNotificationPanel ? (
         <div className={classes.notificationList}>
           <div>
-            {selector.allFriendRequests.map((notification, index) => {
+            { selector.allFriendRequests.length === 0 ?<p className={classes.noNotificationsMessage}>No New Notifications</p> :
+            selector.allFriendRequests.map((notification, index) => {
               return (
                 <div key={index}>
                   <EachFriendRequestNotification notification={notification} />

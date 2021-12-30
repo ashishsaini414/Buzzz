@@ -1,6 +1,7 @@
 import classes from './profileForm.module.css';
 import axios from "axios";
 import {useState} from "react";
+import { toast } from 'react-toastify';
 
 const ProfileForm = (props) => {
 
@@ -30,6 +31,7 @@ const ProfileForm = (props) => {
         task,
         });
         console.log(data);
+        toast.success("Update Successfully")
         
     };
     const handleRatioInput = (e) => {

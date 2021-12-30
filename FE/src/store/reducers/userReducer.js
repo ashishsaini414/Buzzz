@@ -4,16 +4,16 @@ const initialUsersState = {
     allNotifications : [],
     loginUserInfo: {
         loginUserObject:{
-            coverImageUrl: ""
+            coverImageUrl: "",
+            groups:[],
+            recents: [],
+            subscriptions: []
         }
     }
 }
 const userReducer = (state = initialUsersState, action) => {
     switch(action.type){
-        case "LOGIN_USER" : {
-            console.log("test")
-            return {...state, ...action.payload}
-        }
+
         case "SAVE_ALL_SUGGESTIONS":{
             return {...state, mySuggestions: [...action.payload]}
         }
