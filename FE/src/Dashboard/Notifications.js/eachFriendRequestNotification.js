@@ -8,7 +8,7 @@ const EachFriendRequestNotification = (props) => {
     console.log(notification)
     //here notification variable has the object of that person who send the friend request
 
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+    const currentUserUsername = localStorage.getItem("currentUserUsername");
 
     const friendRequestHandler = async () => {
         console.log(notification)

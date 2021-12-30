@@ -9,7 +9,7 @@ const EachSuggestion = (props) => {
     const { suggestion } = props;
     const navigate = useNavigate();
     const [addFriendBoolean, setAddFriendBoolean] = useState(false)
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+    const currentUserUsername = localStorage.getItem("currentUserUsername");
 
     useEffect(()=>{
       if(!suggestion.notifications.friendsRequest.includes(currentUserUsername)){

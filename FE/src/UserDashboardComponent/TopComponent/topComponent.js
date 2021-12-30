@@ -4,8 +4,8 @@ import SampleCoverImage from '../../Assets/Images/blank_wallpaper.jpg'
 
 const TopComponent = () => {
         
-        const currentUserimageUrl = sessionStorage.getItem("imageUrl");
-        const currentUserUsername = sessionStorage.getItem("currentUser");
+        const currentUserimageUrl = localStorage.getItem("imageUrl");
+        const currentUserUsername = localStorage.getItem("currentUser");
 
         const selector = useSelector(state => state.users.loginUserInfo)
         console.log(selector)

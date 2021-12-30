@@ -7,7 +7,7 @@ const ProfileForm = (props) => {
 
     const { getProfileData: { userObject } } = props;
     console.log(userObject)
-    const loginUser = sessionStorage.getItem("currentUserUsername");
+    const loginUser = localStorage.getItem("currentUserUsername");
 
     const [inputFirstName, setInputFirstName] = useState(userObject.firstName);
     const [inputLastName, setInputLastName] = useState(userObject.lastName);

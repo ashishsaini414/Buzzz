@@ -5,7 +5,7 @@ import SampleCoverImage from '../../Assets/Images/blank_wallpaper.jpg'
 
 const OtherUserProfile = (props) => {
   const { getProfileData } = props;
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   console.log("nameis",getProfileData) 
 

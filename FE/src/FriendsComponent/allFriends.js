@@ -10,7 +10,7 @@ const MyFriends = (props) => {
   const [searchText, setSearchText] = useState("");
   const [filteredFriends, setFilteredFriends] = useState([]);
   const myFriends = useSelector((state) => state.users.allFriends);
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   console.log(filteredFriends);
   console.log(searchText);

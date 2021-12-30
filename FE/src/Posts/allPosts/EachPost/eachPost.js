@@ -1,13 +1,12 @@
 import classes from "./eachPost.module.css";
-// import { Image } from "cloudinary-react";
-import SimpleImageSlider from "react-simple-image-slider"
 import EachPostHeader from "./eachPostHeader";
 import EachPostFooter from "./eachPostFooter";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 
 const EachPost = (props) => {
   const { post, moderatorMode } = props;
-  // console.log(post);
   
   return (
     <>
@@ -17,17 +16,13 @@ const EachPost = (props) => {
           <p className={classes.postMessage}>{post.message}</p>
         </div>
         {post.imagesUrl[0].url !== "" && <div className={classes.postImages}>
-        <SimpleImageSlider
-        width={572}
-        height={500}
-        images={post.imagesUrl}
-        showBullets={true}
-        showNavs={true}
-        startIndex={0}
-        loop={false}
-        style={{position: "relative"}}
-        //styling issue of images in this slider
-        />
+          <Carousel autoPlay showArrows={true}>
+            {post.imagesUrl.map((imageObject,index) => {
+              return <div key={index}>
+                <img src={imageObject.url} alt=""/>
+              </div>
+            })}
+          </Carousel>
         </div>}
         <footer><EachPostFooter post={post}/></footer>
       </div>

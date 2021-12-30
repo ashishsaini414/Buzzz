@@ -31,19 +31,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 3.2em;
+    width: 6.2em;
 }
-.postFlagIcon{
+.postApproveFlagIcon{
     background-color: var(--light-grey);
     border-radius: 20px;
-    padding: 0.2em;
-    color: red;
+    padding: 0.3em;
+    color: green;
     cursor: pointer;
+}
+.postApproveFlagIcon:active{
+    background-color: var(--grey);
+    color: rgb(155, 240, 71);
+}
+
+.postRedFlagIcon{
+    background-color: var(--light-grey);
+    border-radius: 20px;
+    padding: 0.3em;
+    color: red;
 }
 .postOptions{
     background-color: var(--light-grey);
     border-radius: 20px;
-    padding: 0.2em;
+    padding: 0.3em;
     color: var(--dark-grey);
     cursor: pointer;
 }

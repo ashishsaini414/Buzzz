@@ -7,7 +7,7 @@ import Loader from "../../Assets/Loader/loader";
 const CreatePost = () => {
 
   const [filesUploaded, setFilesUploaded] = useState("");
-  const currentUserimageUrl = sessionStorage.getItem("imageUrl");
+  const currentUserimageUrl = localStorage.getItem("imageUrl");
   const [isFileSizeRight, setIsFileSizeRight] = useState(true);
   const [loading, setLoading] = useState(false);
   const [inputText, setInputText] = useState("");
@@ -16,7 +16,7 @@ const CreatePost = () => {
   // const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
 
   const cloudinaryUrl = "https://api.cloudinary.com/v1_1/buzzz-social-site/image/upload";
-  const currentUser = sessionStorage.getItem("currentUserUsername");
+  const currentUser = localStorage.getItem("currentUserUsername");
 
   const postSubmitHandler = async (e) => {
     var imagesArray = [];

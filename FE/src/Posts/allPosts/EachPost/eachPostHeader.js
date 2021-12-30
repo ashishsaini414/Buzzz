@@ -7,7 +7,7 @@ const EachPostHeader = (props) => {
   const { post, moderatorMode } = props;
   const { user } = post;
 
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
   const [isAlreadyReported, setIsAlreadyReported] = useState(false);
   const [showPostMenu, setShowPostmenu] = useState(false);
 
@@ -39,6 +39,15 @@ const EachPostHeader = (props) => {
     console.log(mydata);
     toast.success("Post deleted Successfully")
   };
+
+  const approvePostHandler = async () =>{
+
+    const { data} = await axios.post("/approvePost",{
+      postId: post._id,
+    })
+    toast.success("Post Approved Successfully")
+    console.log(data)
+  }
 
   return (
     <div className={classes.PostHeader}>
@@ -73,7 +82,16 @@ const EachPostHeader = (props) => {
 
       <div className={classes.postMenuAndFlagIcons}>
         <span
-          className={classes.postFlagIcon}
+          className={classes.postApproveFlagIcon}
+          onClick={approvePostHandler}
+          style={
+            !moderatorMode ? { visibility: "hidden" } : { visibility: "show" }
+          }
+        >
+          <i className="fas fa-check-circle"></i>
+        </span>
+        <span
+          className={classes.postRedFlagIcon}
           style={
             !moderatorMode ? { visibility: "hidden" } : { visibility: "show" }
           }

@@ -6,20 +6,17 @@ const bodyParser = require("body-parser");
 const routes= require("./Components/routes")
 const session = require("express-session");
 const cookieParser = require("cookie-parser")
+dotenv.config({ path: "./development.env"})
 
-const port = 8000
+const port = process.env.PORT || 8000
 
 app.use(cookieParser())
-
-
-dotenv.config({ path: "./config.env"})
 
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 app.use(routes)
 
 const DB = process.env.DB;
-
 
 mongoose.connect(DB,{
     useNewUrlParser: true

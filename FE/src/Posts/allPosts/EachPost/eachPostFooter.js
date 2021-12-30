@@ -13,8 +13,8 @@ const EachPostFooter = (props) =>{
     const [allCommentsData, setAllCommentsData] = useState([]);
     const [totalLikesDislikesComments, setTotalLikesDislikesComments] = useState({})
 
-    const currentUserimageUrl = sessionStorage.getItem("imageUrl")
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername")
+    const currentUserimageUrl = localStorage.getItem("imageUrl")
+    const currentUserUsername = localStorage.getItem("currentUserUsername")
 
     useEffect(()=>{
         if(post.postReactions.likes.includes(currentUserUsername)){

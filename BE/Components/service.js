@@ -1,8 +1,11 @@
 const users = require("./Model");
+const dotenv = require("dotenv")
+dotenv.config({ path: "./development.env"})
 const { OAuth2Client } = require("google-auth-library")
-const client = new OAuth2Client("539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.apps.googleusercontent.com");
+const client = new OAuth2Client(process.env.CLIENT_ID);
 const jwt = require("jsonwebtoken");
 const { mongo, Types } = require("mongoose");
+
 
 module.exports.getAllSuggestions = async (dataFromClient) => {
   const { loginUser } = dataFromClient;
@@ -133,7 +136,7 @@ module.exports.googleLogin = async (loginData, res) =>{
   try{
    const ticket =  await client.verifyIdToken({
       idToken: tokenId,
-      audience: "539501532126-g3dj34ijo223has1jhjgkff4ofjjk0rt.apps.googleusercontent.com"
+      audience: process.env.CLIENT_ID
     })
    const payload = ticket.getPayload();
    const {email, email_verified, name, given_name, family_name, picture} = payload;
@@ -172,8 +175,7 @@ module.exports.googleLogin = async (loginData, res) =>{
                  const token = jwt.sign({username: email },"thisismysecretkey",{ expiresIn: "1d"})
                 //  console.log({token,user})
                 res.cookie("jwt",token,{
-                  maxAge: 3600000,
-                  httpOnly: true
+                  maxAge: 36000000,
                 })
                 res.send({token, user,isNewUserCreated: true});
                 }
@@ -436,6 +438,12 @@ module.exports.deletePost = async (dataFromClient) => {
   const { postId } = dataFromClient;
   const deletedPost = await users.Posts.findByIdAndDelete(postId);
   return deletedPost;
+}
+
+module.exports.approvePost = async (dataFromClient)=>{
+  const { postId } = dataFromClient;
+  const response = await users.Posts.findByIdAndUpdate(postId,{$set: {reports: []}},{new: true})
+  return response
 }
 
 module.exports.getFilteredSuggestion = async (dataFromClient) => {

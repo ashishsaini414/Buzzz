@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 const UserDashboardComponent = () => {
     const dispatch = useDispatch();
 
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+    const currentUserUsername = localStorage.getItem("currentUserUsername");
     useEffect(()=>{
         async function getLoginUserInfo(){
             fetch("/getLoginUserAllInformation",{

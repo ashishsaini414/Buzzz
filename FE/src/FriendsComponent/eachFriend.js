@@ -9,7 +9,7 @@ const FriendsComponent = (props) => {
   const navigate = useNavigate();
 
     const [isFriendRemoved, setIsFriendRemoved] = useState(false)
-    const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+    const currentUserUsername = localStorage.getItem("currentUserUsername");
 
     const removeFriendHandler = async (friend)=>{
         console.log(friend)

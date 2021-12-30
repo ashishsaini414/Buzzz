@@ -5,7 +5,7 @@ import classes from "./notifications.module.css";
 
 const NotificationIcon = () => {
   const [showNotificationPanel, setShowNotificationPanel] = useState(false);
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.users.allNotifications);
   console.log(selector);

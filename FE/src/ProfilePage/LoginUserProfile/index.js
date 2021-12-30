@@ -15,7 +15,7 @@ const LoginUserProfile = (props) => {
   console.log(getProfileData);
   const cloudinaryUrl =
     "https://api.cloudinary.com/v1_1/buzzz-social-site/image/upload";
-  const loginUser = sessionStorage.getItem("currentUserUsername");
+  const loginUser = localStorage.getItem("currentUserUsername");
 
   const updateProfileHandler = async (e, task) => {
     setLoading(true);

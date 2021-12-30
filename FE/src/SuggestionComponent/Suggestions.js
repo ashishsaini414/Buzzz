@@ -8,7 +8,7 @@ const Suggestions = (props) => {
   const [showSearchInput, setShowSearchHandler] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   console.log(searchText);
   console.log(filteredSuggestions);

@@ -12,7 +12,7 @@ const AllPosts = (props) => {
   const [isNextPageNumber, setIsNextPageNumber] = useState(1)
   const [isModeratorModeON, setIsModeratorModeON] = useState(false);
   const [hasMorePosts, setHasMorePosts] = useState(true)
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   const dispatch = useDispatch();
 
@@ -112,9 +112,11 @@ const AllPosts = (props) => {
             hasMore={hasMorePosts}
             loader={<p className={classes.loader}><Loader/></p>}
             endMessage={
-              <p className={classes.endMessage}>
-                <b>Yay! You have seen it all</b>
-              </p>
+              <div className={classes.endMessage}>
+                {
+                  allReportedPostsDataFromRedux.length === 0 && allPostsDataFromRedux.length === 0 ? <b> No posts</b> : <b>Yay! You have seen it all</b>
+                }
+              </div>
             }
           >
             { isModeratorModeON ? 

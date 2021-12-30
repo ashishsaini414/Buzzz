@@ -30,7 +30,7 @@ const EachProfilePage = () => {
   
   const params = useParams();
 
-  const currentUserUsername = sessionStorage.getItem("currentUserUsername");
+  const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   useEffect(() => {
     async function getProfileData() {
