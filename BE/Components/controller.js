@@ -85,5 +85,13 @@ module.exports.deletePost = async (req, res) => {
     const response = await users.deletePost(req.body);
     res.send(JSON.stringify(response));
 }
+module.exports.getFilteredSuggestion = async (req, res) => {
+    const response = await users.getFilteredSuggestion(req.body);
+    res.send(JSON.stringify(response));
+}
+module.exports.getFilteredFriends = async (req, res) => {
+    const response = await users.getFilteredFriends(req.body);
+    res.send(JSON.stringify(response));
+}
 
 

@@ -21,5 +21,8 @@ router.post("/updateProfileData",users.updateProfileData);
 router.post("/reportPost",users.reportPost)
 router.post("/getAllReportedPosts",users.getAllReportedPosts);
 router.delete("/deletePost",users.deletePost)
+router.post("/getFilteredSuggestion",users.getFilteredSuggestion);
+router.post("/getFilteredFriends",users.getFilteredFriends);
+
 
 module.exports = router;

@@ -54,13 +54,15 @@ module.exports.getAllFriends = async (loginUser) => {
       var new2 = await users.User.findOne({ username: user });
       return new2;
     });
-    return Promise.all(result).then((res) => {
+    const allFriends =  Promise.all(result).then((res) => {
       var Myfriends = [];
       for (const key in res) {
         Myfriends.push(res[key]);
       }
       return Myfriends;
     });
+    // console.log("ashish.saini///",allFriends)
+    return allFriends
   } catch (err) {
     return "Not Found";
   }
@@ -434,4 +436,73 @@ module.exports.deletePost = async (dataFromClient) => {
   const { postId } = dataFromClient;
   const deletedPost = await users.Posts.findByIdAndDelete(postId);
   return deletedPost;
+}
+
+module.exports.getFilteredSuggestion = async (dataFromClient) => {
+  const {loginUser, inputText} = dataFromClient;
+  // all user suggestions
+
+  try {
+    const loginUserObject = await users.User.findOne({username: loginUser}); // 
+    const allUsersArray = await users.User.find({});
+    console.log(loginUserObject)
+
+    const newAllSuggestions = allUsersArray.filter(user => {
+      if(user.username !== loginUserObject.username){
+        if(loginUserObject.friends.length !== 0){
+          for(const key in loginUserObject.friends){
+              if(user.username !== loginUserObject.friends[key]){
+                return user
+              }
+            }
+        }
+        else{
+          return user
+        }
+      }
+    }
+    )
+    //filtering the suggestions by input Text
+    const filteredSuggestions = newAllSuggestions.filter((item)=>{
+      return item.name.toLowerCase().includes(inputText.toLowerCase()) || item.username.toLowerCase().includes(inputText.toLowerCase())
+    })
+    console.log("////",filteredSuggestions)
+    return filteredSuggestions;
+  } catch (error) {
+    return error.message;
+  }
+
+  // return dataFromClient
+}
+
+module.exports.getFilteredFriends = async (dataFromClient) => {
+  const {loginUser, inputText} = dataFromClient;
+  
+  try {
+
+    //find the login user
+    const response = await users.User.findOne({
+      username: loginUser,
+    });
+    //getting all friends of login user
+
+    const result = await response.friends.map(async (user) => {
+      var new2 = await users.User.findOne({ username: user });
+      return new2;
+    });
+    const filteredFriends =  Promise.all(result).then((res) => {
+      var Myfriends = [];
+      for (const key in res) {
+        Myfriends.push(res[key]);
+      }
+      return Myfriends.filter((item)=>{
+        return item.name.toLowerCase().includes(inputText.toLowerCase()) || item.username.toLowerCase().includes(inputText.toLowerCase())
+      })
+    });
+
+    return filteredFriends
+
+  } catch (error) {
+    return error.message;
+  }
 }

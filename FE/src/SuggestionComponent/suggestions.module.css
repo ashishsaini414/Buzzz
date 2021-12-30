@@ -22,6 +22,17 @@
     border-radius: 50%;
     padding: 3px 4px;
     color: var(--grey);
+    cursor: pointer;
+}
+.searchIcon:active {
+    background-color: var(--grey);
+}
+.searchInput{
+    width: 100%;
+    height: 2em;
+    border-radius: 5px;
+    border: 1px solid var(--light-grey);
+    padding: 0 5px;
 }
 .suggestionList{
     margin-top: 5px;
