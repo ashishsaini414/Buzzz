@@ -5,10 +5,10 @@ import Dashboard from './Dashboard/dashboard'
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfilePage from "./ProfilePage/profilePage";
-import Cookies from 'js-cookie';
 
 function App() {
   const currentUserUsername = localStorage.getItem("currentUserUsername");
+  
   return (
     <div className="App">
       <ToastContainer autoClose={2000}/>

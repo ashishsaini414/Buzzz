@@ -18,6 +18,10 @@
     z-index: 3;
     color: rgb(225, 208, 208);
 }
+#unlikeButton{
+    color: rgb(32, 113, 119);
+    font-weight: bold;
+}
 
 .FirstRow{
     border-top: 1px solid var(--light-grey);
@@ -39,9 +43,6 @@
 }
 .activityButton:disabled{
     visibility: hidden;
-}
-.LikeText{
-    margin-left: 2px;
 }
 .secondRow{
     display: flex;

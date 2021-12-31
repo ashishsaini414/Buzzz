@@ -110,16 +110,12 @@ const EachPostFooter = (props) =>{
         </div>
         <div className={classes.FirstRow}>
             {!likeToggle ? <button id={classes.likeButton} disabled={dislikeToggle} className={classes.activityButton} onClick={()=>likeButtonHandler(post,"like")}>
-                <i className="far fa-thumbs-up"></i>
-                <span className={classes.LikeText}>Like</span>
-            </button> : 
-            <button id={classes.unlikeButton} className={classes.activityButton} onClick={()=>likeButtonHandler(post,"unlike")}>UnLike</button> }
+                <i className="far fa-thumbs-up"></i> Like</button> : 
+            <button id={classes.unlikeButton} className={classes.activityButton} onClick={()=>likeButtonHandler(post,"unlike")}><i className="fas fa-thumbs-up" style={{color: "#3072af"}}></i> Like</button> }
 
             {!dislikeToggle ? <button id={classes.likeButton} disabled={likeToggle} className={classes.activityButton} onClick={()=>dislikeButtonHandler(post,"dislike")}>
-                <i className="far fa-thumbs-down"></i>
-                <span className={classes.LikeText}>DisLike</span>
-            </button> : 
-            <button id={classes.unlikeButton} className={classes.activityButton} onClick={()=>dislikeButtonHandler(post,"unDislike")}>Un-DisLike</button> }
+            <i className="far fa-thumbs-down"></i> DisLike</button> : 
+            <button id={classes.unlikeButton} className={classes.activityButton} onClick={()=>dislikeButtonHandler(post,"unDislike")}><i className="fas fa-thumbs-down" style={{color: "#3072af"}}></i> DisLike</button> }
 
             <button id={classes.commentButton} className={classes.activityButton} onClick={PostAllCommentsHandler}>
                 <i className="far fa-comment-alt" id={classes.commentButtontext}>
