@@ -6,7 +6,7 @@ const BottomComponent = () => {
   const userObject = useSelector(
     (state) => state.users.loginUserInfo.loginUserObject
   );
-  console.log(userObject);
+  // console.log(userObject);
 
   return (
     <div className={classes.bottomComponent}>

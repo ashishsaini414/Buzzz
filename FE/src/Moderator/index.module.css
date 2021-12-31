@@ -1,31 +1,28 @@
-.moderator{
-    display: flex;
-    column-gap: 1em;
-    align-items: center;
-    background-color: #2196F3;
-    border-radius: 20px;
-}
-.moderatorTitle{
-    font-size: 1em;
-    margin-left: 10px;
-    color: var(--white);
-}
-/* The switch - the box around the slider */
-.switch {
+  .moderator{
+      display: flex;
+      column-gap: 1em;
+      align-items: center;
+      background-color: #2196F3;
+      border-radius: 20px;
+  }
+  .moderatorTitle{
+      font-size: 1em;
+      margin-left: 10px;
+      color: var(--white);
+  }
+  .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
   }
   
-  /* Hide default HTML checkbox */
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
   
-  /* The slider */
   .slider {
     position: absolute;
     cursor: pointer;
@@ -64,7 +61,6 @@
     transform: translateX(26px);
   }
   
-  /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }

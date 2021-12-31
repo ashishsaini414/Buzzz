@@ -3,7 +3,6 @@
     background-color: var(--white);
     border-radius: 8px;
 }
-
 .suggestionHeader{
     text-align: left;
     padding-top: 0.5em ;
@@ -38,6 +37,11 @@
     margin-top: 5px;
     overflow: auto;
     height: 18em;
+}
+.noFriendsMessage{
+    color: var(--dark-grey);
+    margin-top: 0.5em;
+    font-size: 0.9em;
 }
 .suggestionList::-webkit-scrollbar{
     width: 6px;

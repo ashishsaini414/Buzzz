@@ -15,8 +15,9 @@ const Login = () => {
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(response)
       }).then(res => res.json()).then(data =>{
-            console.log("This is login information",data)
-              localStorage.setItem("authToken",JSON.stringify(data.token))
+              console.log("This is login information",data)
+              localStorage.setItem("isLoggedIn",true)
+              localStorage.setItem("tokenDetails",JSON.stringify(data.tokenDetails))
               localStorage.setItem("currentUser",data.user.name);
               localStorage.setItem("imageUrl",data.user.imageUrl);
               localStorage.setItem("currentUserUsername",data.user.username)
@@ -24,7 +25,7 @@ const Login = () => {
       })
   };
   const failureResponseGoogle = (response) => {
-    console.log(response);
+    console.log("Google response failed - ",response);
   }
 
   return (

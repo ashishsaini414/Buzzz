@@ -3,7 +3,6 @@ import ttnLogo from "../Assets/Images/TTNLogo.jpeg";
 import { GoogleLogout} from 'react-google-login';
 import userLogo from '../Assets/Images/userlogo';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import NotificationIcon from "../Dashboard/Notifications.js/notifications";
 
@@ -12,17 +11,17 @@ import classes from './navigationBar.module.css';
 const NavigationBar = () => {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch();
 
   const currentUserimageUrl = localStorage.getItem("imageUrl");
   const currentUser = localStorage.getItem("currentUser");
   const currentUserUsername = localStorage.getItem("currentUserUsername");
 
   const logout = (response) => {
-    localStorage.removeItem("authToken")
+    localStorage.removeItem("tokenDetails")
     localStorage.removeItem("currentUser")
     localStorage.removeItem("currentUserUsername")
     localStorage.removeItem("imageUrl")
+    localStorage.setItem("isLoggedIn",false)
     navigate("/")
   }
 

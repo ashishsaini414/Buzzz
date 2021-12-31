@@ -9,11 +9,9 @@ const { mongo, Types } = require("mongoose");
 
 module.exports.getAllSuggestions = async (dataFromClient) => {
   const { loginUser } = dataFromClient;
-  console.log(loginUser)
   try {
-    const loginUserObject = await users.User.findOne({username: loginUser}); // 
+    const loginUserObject = await users.User.findOne({username: loginUser});
     const allUsersArray = await users.User.find({});
-    console.log(loginUserObject)
 
     const newAllSuggestions = allUsersArray.filter(user => {
       if(user.username !== loginUserObject.username){
@@ -64,7 +62,6 @@ module.exports.getAllFriends = async (loginUser) => {
       }
       return Myfriends;
     });
-    // console.log("ashish.saini///",allFriends)
     return allFriends
   } catch (err) {
     return "Not Found";
@@ -77,11 +74,11 @@ module.exports.addFriend = async (dataFromClient) => {
  
     const loginUserObject = await users.User.findOne({username: loginUser})
     const friendUserObject = await users.User.findOne({username: friendUser})
-    // console.log("login and frienduser",loginUserObject,friendUserObject)
+
     if(!loginUserObject.friends.includes(friendUser) && !friendUserObject.notifications.friendsRequest.includes(loginUser)){
         const response  = await friendUserObject.updateOne({$push : {"notifications.friendsRequest": loginUser}});
         const res = await users.User.findOne({username: friendUser})
-        // console.log("output",res)
+
         return {user: res, message: "Friend Request Sent"}
     }
     else{
@@ -154,30 +151,25 @@ module.exports.googleLogin = async (loginData, res) =>{
             //Refernce- https://www.npmjs.com/package/jsonwebtoken
 
             const token = jwt.sign({_id: _id },"thisismysecretkey",{ expiresIn: "1d"})
-            console.log({token,user})   //returning the existing user with a JWT
-            res.cookie("jwt",token,{
-              maxAge: 60000,
-              httpOnly: true
-            })
-            res.send({token,user,isNewUserCreated: false})
+            const currentTime = new Date().getTime()
+            const tokenExpirationTime = currentTime + 24*60*60*1000; //24*60*60*1000 === 24 hours
+            const expiresIn = tokenExpirationTime - currentTime;
+
+            res.send({tokenDetails: {tokenId: token ,expiresIn},user,isNewUserCreated: false})
           }
           else{
             console.log("create new user")
               const newUser = await new users.User({name, username: email, firstName: given_name, lastName: family_name, imageUrl: picture});
-              // console.log(newUser)
-            const new22= await newUser.save((err,user)=>{
-                // console.log(err)
-                // console.log(user)
+              const new22= await newUser.save((err,user)=>{
                 if(err){
                   res.send(err.message)
                 }
                 else{
                  const token = jwt.sign({username: email },"thisismysecretkey",{ expiresIn: "1d"})
-                //  console.log({token,user})
-                res.cookie("jwt",token,{
-                  maxAge: 36000000,
-                })
-                res.send({token, user,isNewUserCreated: true});
+                 const currentTime = new Date().getTime()
+                 const tokenExpirationTime = currentTime + 24*60*60*1000; //24*60*60*1000 === 24 hours
+                 const expiresIn = tokenExpirationTime - currentTime;
+                 res.send({tokenDetails: {tokenId: token ,expiresIn},user,isNewUserCreated: true});
                 }
               })
           }
@@ -243,13 +235,12 @@ module.exports.postReaction = async (dataFromClient) =>{
   const { reaction,postId, user} = dataFromClient;
   try{
     const post = await users.Posts.findById(postId)
-    // console.log(post)
+
     if(reaction === "like"){
       console.log("hii this is starting for like")
         const res = await post.updateOne({$push: {"postReactions.likes" : user}})
         const updatedpost = await users.Posts.findById(postId);
         const totallikes = await updatedpost.postReactions.likes.length
-        console.log(totallikes)
         return {updatedpost, totallikes}
     }
     if(reaction === "unlike"){
@@ -257,7 +248,6 @@ module.exports.postReaction = async (dataFromClient) =>{
         const response = await post.updateOne({$pull : {"postReactions.likes": user}});
         const updatedpost = await users.Posts.findById(postId);
         const totallikes = await updatedpost.postReactions.likes.length
-        console.log(totallikes)
         return {updatedpost, totallikes}
     }
      if(reaction === "dislike"){
@@ -265,7 +255,6 @@ module.exports.postReaction = async (dataFromClient) =>{
         const res = await post.updateOne({$push: {"postReactions.dislikes" : user}})
         const updatedpost = await users.Posts.findById(postId);
         const totalDislikes = await updatedpost.postReactions.dislikes.length
-        console.log(totalDislikes)
         return {updatedpost, totalDislikes}
     }
     if(reaction === "unDislike"){
@@ -273,7 +262,6 @@ module.exports.postReaction = async (dataFromClient) =>{
         const response = await post.updateOne({$pull : {"postReactions.dislikes": user}});
         const updatedpost = await users.Posts.findById(postId);
         const totalDislikes = await updatedpost.postReactions.dislikes.length
-        console.log(totalDislikes)
         return {updatedpost, totalDislikes}
     }
   }
@@ -298,38 +286,54 @@ module.exports.postComment =async (dataFromClient)=>{
 
 module.exports.getPostAllComments = async (dataFromClient) => {
     const {postId} = dataFromClient;
-    const allComments = await users.Posts.findById(postId);
-    return allComments.comments;
+    try{
+      const allComments = await users.Posts.findById(postId);
+      return allComments.comments;
+    }
+    catch(err){
+      return err;
+    }
+    
 }
 
 module.exports.getPostLikesDislikesCommentsValues = async (dataFromClient)=>{
   const {postId} = dataFromClient
-  const currentPost = await users.Posts.findById(postId)
-  const totalLikes = currentPost.postReactions.likes.length;
-  const totalDislikes = currentPost.postReactions.dislikes.length;
-  const totalComments = currentPost.comments.length;
-  return {totalLikes,totalDislikes,totalComments};
+  try{
+
+    const currentPost = await users.Posts.findById(postId)
+    const totalLikes = currentPost.postReactions.likes.length;
+    const totalDislikes = currentPost.postReactions.dislikes.length;
+    const totalComments = currentPost.comments.length;
+    return {totalLikes,totalDislikes,totalComments}; 
+    }
+    catch(err){
+      return err;
+    }
 }
 
 module.exports.getAllNotifications = async (dataFromClient) => {
   const { loginUser } = dataFromClient;
-  // console.log("loginuser",loginUser)
-  const AllNotifications = {
-    allFriendRequests : []
-  };
 
-  //find the login user object
-  const loginUserObject = await users.User.findOne({username: loginUser});
-  // console.log(loginUserObject)
+  try{
+    const AllNotifications = {
+      allFriendRequests : []
+    };
+  
+    //find the login user object
+    const loginUserObject = await users.User.findOne({username: loginUser});
+  
+    //Get all friends requests notifications
+    for(const key in loginUserObject.notifications.friendsRequest){
+      const result = await users.User.findOne({username: loginUserObject.notifications.friendsRequest[key]});
+      AllNotifications.allFriendRequests.push(result);
+    }
 
-  //Get all friends requests notifications
-  for(const key in loginUserObject.notifications.friendsRequest){
-    console.log(loginUserObject.notifications.friendsRequest[key])
-    const result = await users.User.findOne({username: loginUserObject.notifications.friendsRequest[key]});
-    AllNotifications.allFriendRequests.push(result);
+    return AllNotifications;
   }
-  // console.log("allnotifications",AllNotifications)
-  return AllNotifications;
+  catch(err){
+    return err
+  }
+  
 }
 
 module.exports.acceptFriendRequest = async (dataFromClient) => {
@@ -357,93 +361,131 @@ module.exports.acceptFriendRequest = async (dataFromClient) => {
 }
 module.exports.getLoginUserAllInformation = async (dataFromClient) => {
   const { loginUser } = dataFromClient;
+  try{
+    const loginUserObject = await users.User.findOne({username: loginUser});
+    const postCounts = await users.Posts.find({"user.username": loginUser}).count();
 
-  const loginUserObject = await users.User.findOne({username: loginUser});
-  const postCounts = await users.Posts.find({"user.username": loginUser}).count();
-  console.log(loginUserObject, postCounts)
-  const profileViews = loginUserObject.otherInformation.totalProfileViews;
-  return {loginUserObject,postCounts,profileViews};
+    const profileViews = loginUserObject.otherInformation.totalProfileViews;
+    return {loginUserObject,postCounts,profileViews};
+  }
+  catch(err){
+    return err
+  }
 }
 module.exports.getProfileData = async (dataFromClient) => {
   const { profileUserUsername, loginUserUsername } = dataFromClient;
-  console.log(profileUserUsername)
-  const userObject = await users.User.findOne({username : profileUserUsername})
-  if(profileUserUsername === loginUserUsername){
-    return {userObject , isAccountOwner: true};
+  try{
+
+    const userObject = await users.User.findOne({username : profileUserUsername})
+    if(profileUserUsername === loginUserUsername){
+      return {userObject , isAccountOwner: true};
+    }
+    else{
+      await users.User.findOneAndUpdate({username : loginUserUsername},{$inc : {"otherInformation.totalProfileViews": 1}},{new: true});
+      return {userObject , isAccountOwner: false};
+    }
   }
-  else{
-    await users.User.findOneAndUpdate({username : loginUserUsername},{$inc : {"otherInformation.totalProfileViews": 1}},{new: true});
-    return {userObject , isAccountOwner: false};
+  catch(err){
+    return err
   }
+  
 }
 
 module.exports.updateProfileData = async (dataFromClient)=>{
   const {loginUser , coverImageLink, task, data} = dataFromClient;
-  console.log(loginUser, coverImageLink, task, data);
-  //for cover image
-  if(task === "coverImageUpload"){
-    const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {coverImageUrl : coverImageLink}},{new: true})
-    console.log(result)
-    return {coverImageLink: result.coverImageUrl};
-  }
-  //for profile image
-  if(task === "profileImageUpload"){
-    const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {imageUrl : coverImageLink}},{new: true})
-    return {profileImageLink: result.imageUrl}
-  }
-  //for profile data updation
+  try{
 
-  if(task === "profileDataUpdate"){
-    const response = await users.User.findOne({username: loginUser});
-    const result = await users.User.findOneAndUpdate({username: loginUser},{$set:{
-      firstName: data.inputFirstName,
-      lastName: data.inputLastName,
-      name: data.inputFirstName+" "+ data.inputLastName,
-      "otherInformation.designation": data.inputDesignation,
-      "otherInformation.website": data.inputWebsite,
-      "otherInformation.gender": data.inputGender,
-      "otherInformation.birthday": data.inputBirthday,
-      "otherInformation.address.city": data.inputCity,
-      "otherInformation.address.state": data.inputState,
-      "otherInformation.address.zip": data.inputZip
-    }},{new: true})
-    return result;
+    //for cover image
+    if(task === "coverImageUpload"){
+      const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {coverImageUrl : coverImageLink}},{new: true})
+      return {coverImageLink: result.coverImageUrl};
+    }
+    //for profile image
+    if(task === "profileImageUpload"){
+      const result = await users.User.findOneAndUpdate({username: loginUser},{$set : {imageUrl : coverImageLink}},{new: true})
+      return {profileImageLink: result.imageUrl}
+    }
+    //for profile data updation
+  
+    if(task === "profileDataUpdate"){
+      const response = await users.User.findOne({username: loginUser});
+      const result = await users.User.findOneAndUpdate({username: loginUser},{$set:{
+        firstName: data.inputFirstName,
+        lastName: data.inputLastName,
+        name: data.inputFirstName+" "+ data.inputLastName,
+        "otherInformation.designation": data.inputDesignation,
+        "otherInformation.website": data.inputWebsite,
+        "otherInformation.gender": data.inputGender,
+        "otherInformation.birthday": data.inputBirthday,
+        "otherInformation.address.city": data.inputCity,
+        "otherInformation.address.state": data.inputState,
+        "otherInformation.address.zip": data.inputZip
+      }},{new: true})
+      return result;
+    }
   }
+  catch(err){
+    return err
+  }
+  
   
 }
 
 module.exports.reportPost = async (dataFromClient) => {
   const { loginUser, reportedPostId } = dataFromClient;
-  const result = await users.Posts.findById(reportedPostId)
-  await result.updateOne({$push: {reports: loginUser}})
-  const result2 = await users.Posts.findById(reportedPostId)
-
-  return result2
+  try{
+    const result = await users.Posts.findById(reportedPostId)
+    await result.updateOne({$push: {reports: loginUser}})
+    const result2 = await users.Posts.findById(reportedPostId)
+  
+    return result2
+  }
+  catch(err){
+    return err;
+  }
+  
 }
 
 module.exports.getAllReportedPosts = async (dataFromClient) => {
   const { page } = dataFromClient;
-  const integerNumberOfPage = parseInt(page)
-  const limit = 3;
-  const firstIndex = (integerNumberOfPage-1)*limit;
-  const lastIndex = integerNumberOfPage*limit;
+  try{
+    const integerNumberOfPage = parseInt(page)
+    const limit = 10;
+    const firstIndex = (integerNumberOfPage-1)*limit;
+    const lastIndex = integerNumberOfPage*limit;
+    
+    const allReportedPosts = await users.Posts.find({"reports.0" : { $exists : true } })
+    const returningAllReportedPosts = allReportedPosts.slice(firstIndex,lastIndex)
   
-  const allReportedPosts = await users.Posts.find({"reports.0" : { $exists : true } })
-  const returningAllReportedPosts = allReportedPosts.slice(firstIndex,lastIndex)
-
-  return returningAllReportedPosts;
+    return returningAllReportedPosts;
+  }
+  catch(err){
+    return err
+  }
+  
 }
 
 module.exports.deletePost = async (dataFromClient) => {
   const { postId } = dataFromClient;
-  const deletedPost = await users.Posts.findByIdAndDelete(postId);
-  return deletedPost;
+  try{
+    const deletedPost = await users.Posts.findByIdAndDelete(postId);
+    return deletedPost;
+  }
+  catch(err){
+    return err
+  }
 }
 
 module.exports.approvePost = async (dataFromClient)=>{
   const { postId } = dataFromClient;
-  const response = await users.Posts.findByIdAndUpdate(postId,{$set: {reports: []}},{new: true})
-  return response
+  try{
+    const response = await users.Posts.findByIdAndUpdate(postId,{$set: {reports: []}},{new: true})
+    return response
+  }
+  catch(err){
+    return err;
+  }
+  
 }
 
 module.exports.getFilteredSuggestion = async (dataFromClient) => {
@@ -453,7 +495,6 @@ module.exports.getFilteredSuggestion = async (dataFromClient) => {
   try {
     const loginUserObject = await users.User.findOne({username: loginUser}); // 
     const allUsersArray = await users.User.find({});
-    console.log(loginUserObject)
 
     const newAllSuggestions = allUsersArray.filter(user => {
       if(user.username !== loginUserObject.username){
@@ -474,7 +515,7 @@ module.exports.getFilteredSuggestion = async (dataFromClient) => {
     const filteredSuggestions = newAllSuggestions.filter((item)=>{
       return item.name.toLowerCase().includes(inputText.toLowerCase()) || item.username.toLowerCase().includes(inputText.toLowerCase())
     })
-    console.log("////",filteredSuggestions)
+
     return filteredSuggestions;
   } catch (error) {
     return error.message;
@@ -508,7 +549,7 @@ module.exports.getFilteredFriends = async (dataFromClient) => {
       })
     });
 
-    return filteredFriends
+    return filteredFriends;
 
   } catch (error) {
     return error.message;

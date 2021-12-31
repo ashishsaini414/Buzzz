@@ -12,8 +12,8 @@ const MyFriends = (props) => {
   const myFriends = useSelector((state) => state.users.allFriends);
   const currentUserUsername = localStorage.getItem("currentUserUsername");
 
-  console.log(filteredFriends);
-  console.log(searchText);
+  // console.log(filteredFriends);
+  // console.log(searchText);
 
   useEffect(() => {
     fetch("/getAllFriends", {
@@ -33,7 +33,7 @@ const MyFriends = (props) => {
         loginUser: currentUserUsername,
         inputText: searchText,
       });
-      console.log(data);
+
       setFilteredFriends(data);
     }, 500);
     return () => clearTimeout(timeoutDelay);
@@ -71,6 +71,7 @@ const MyFriends = (props) => {
           </div>
         )}
         <div className={classes.suggestionList}>
+          {filteredFriends.length === 0 && <p className={classes.noFriendsMessage}>No Friends</p>}
           {filteredFriends.map((friend, index) => {
             return (
               <div key={index}>

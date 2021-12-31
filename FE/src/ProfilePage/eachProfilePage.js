@@ -44,7 +44,7 @@ const EachProfilePage = () => {
     getProfileData();
   }, [params, currentUserUsername]);
 
-  console.log(getProfileData);
+  // console.log(getProfileData);
 
   return (
     <Fragment>

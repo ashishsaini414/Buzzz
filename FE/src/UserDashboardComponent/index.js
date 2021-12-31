@@ -15,7 +15,7 @@ const UserDashboardComponent = () => {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({loginUser: currentUserUsername})
             }).then(res => res.json()).then(data => {
-            console.log("data",data)
+            // console.log("data",data)
 
                 dispatch({type:"SAVE_LOGIN_USER_INFO", payload: data})
             })

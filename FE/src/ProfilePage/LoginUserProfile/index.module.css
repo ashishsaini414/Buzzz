@@ -13,10 +13,7 @@
 .coverImagesElements{
     display: flex;
     flex-direction: column;
-    /* margin: 3em auto; */
-
     text-align: center;
-    /* height: 1em; */
 }
 .coverImagesElements > *:first-child{
     margin: 2.8em auto;

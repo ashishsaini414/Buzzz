@@ -10,8 +10,8 @@ const Suggestions = (props) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const currentUserUsername = localStorage.getItem("currentUserUsername");
 
-  console.log(searchText);
-  console.log(filteredSuggestions);
+  // console.log(searchText);
+  // console.log(filteredSuggestions);
 
   const dispatch = useDispatch();
   const mySuggestions = useSelector((state) => state.users.mySuggestions);
@@ -35,7 +35,7 @@ const Suggestions = (props) => {
         loginUser: currentUserUsername,
         inputText: searchText,
       });
-      console.log(data);
+      // console.log(data);
       setFilteredSuggestions(data);
     }, 500);
     return () => clearTimeout(timeoutDelay);
@@ -73,6 +73,7 @@ const Suggestions = (props) => {
           </div>
         )}
         <div className={classes.suggestionList}>
+          {filteredSuggestions.length === 0 && <p className={classes.noSuggestionMessage}>No Suggestions</p>}
           {filteredSuggestions.map((data, index) => {
             return (
               <div key={index}>

@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import "./App.css";
 import Login from "./googleLogin/index";
 import Dashboard from './Dashboard/dashboard'
@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProfilePage from "./ProfilePage/profilePage";
 
 function App() {
+  
   const currentUserUsername = localStorage.getItem("currentUserUsername");
   
   return (

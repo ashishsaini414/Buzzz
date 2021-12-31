@@ -3,9 +3,6 @@
     background-color: var(--light-grey);
     position: relative;
 }
-.WebsiteLogo{
-    border-radius: 5px;
-}
 .middleComponents{
     display: flex;
     justify-content: space-evenly;
@@ -16,11 +13,9 @@
     height: 20em;
     width: 15em;
 }
-
 .posts{
     width: 38em;
 }
-
 .asideComponents{
     display: flex;
     flex-direction: column;

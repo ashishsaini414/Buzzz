@@ -19,8 +19,8 @@ const AllPosts = (props) => {
   const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
   const allReportedPostsDataFromRedux = useSelector(state => state.posts.reportedPosts)
 
-  console.log(allPostsDataFromRedux);
-  console.log(allReportedPostsDataFromRedux);
+  // console.log(allPostsDataFromRedux);
+  // console.log(allReportedPostsDataFromRedux);
 
     useEffect(() => {
       //-------fetch all posts
@@ -29,7 +29,7 @@ const AllPosts = (props) => {
         username: currentUserUsername,
         page: isNextPageNumber,
         });
-        console.log(data)
+        // console.log(data)
         dispatch({type: "DELETE_ALL_SAVED_REPORTED_POSTS"})
         dispatch({type: "ADD_NEW_POSTS", payload: data})
 
@@ -42,7 +42,7 @@ const AllPosts = (props) => {
         const ReportedPostsdata = await axios.post("/getAllReportedPosts",{
           page: isNextPageNumber,
       });
-      console.log(ReportedPostsdata.data)
+      // console.log(ReportedPostsdata.data)
       dispatch({type: "SAVE_REPOTED_POST", payload: ReportedPostsdata.data});
       dispatch({type: "DELETE_ALL_SAVED_POSTS"});
 
@@ -50,7 +50,7 @@ const AllPosts = (props) => {
         setHasMorePosts(false)
       }
 
-      console.log(ReportedPostsdata);
+      // console.log(ReportedPostsdata);
 
       }
 
@@ -68,7 +68,7 @@ const AllPosts = (props) => {
   }
 
   const moderatorHandler = (condition) => {
-    console.log(condition);
+    // console.log(condition);
     if(condition){
       setIsModeratorModeON(condition);
       setHasMorePosts(true)
@@ -102,7 +102,7 @@ const AllPosts = (props) => {
             </select>
           </div>
           {
-            currentUserUsername === "ashish.saini@tothenew.com" && <Moderator isModeratorModeON = {moderatorHandler}/>
+            currentUserUsername === process.env.REACT_APP_MODERATOR_USERNAME && <Moderator isModeratorModeON = {moderatorHandler}/>
           }
         </div>
         <div classes={classes.post}>

@@ -23,7 +23,7 @@ const EachSuggestion = (props) => {
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({loginUser: currentUserUsername, friendUser:friend.username})
         }).then(res => res.json()).then(data => {
-          console.log(data)
+          // console.log(data)
           setAddFriendBoolean(prevState => !prevState)
         })
 }

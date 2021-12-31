@@ -8,8 +8,8 @@ const NotificationIcon = () => {
   const currentUserUsername = localStorage.getItem("currentUserUsername");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.users.allNotifications);
-  console.log(selector);
-  //   console.log(currentUserUsername)
+  // console.log(selector);
+
   useEffect(() => {
     async function getAllNotifications() {
       const response = await fetch("/getAllNotifications", {
@@ -18,7 +18,7 @@ const NotificationIcon = () => {
         body: JSON.stringify({ loginUser: currentUserUsername }),
       });
       const result = await response.json();
-      console.log("///", result);
+
       dispatch({ type: "ALL_NOTIFICATIONS", payload: result });
     }
     getAllNotifications();

@@ -18,7 +18,7 @@ const EachPostHeader = (props) => {
   }, [currentUserUsername, post.reports]);
 
   const reportPostHandler = async (e) => {
-    console.log(e);
+    // console.log(e);
     const { data } = await axios.post("/reportPost", {
       loginUser: currentUserUsername,
       reportedPostId: e._id,
@@ -26,7 +26,7 @@ const EachPostHeader = (props) => {
     if (data.reports.includes(currentUserUsername)) {
       toast.success("Reported Successfully");
     }
-    console.log(data);
+    // console.log(data);
     setIsAlreadyReported(true);
   };
 
@@ -36,7 +36,7 @@ const EachPostHeader = (props) => {
         postId: post._id,
       },
     });
-    console.log(mydata);
+    // console.log(mydata);
     toast.success("Post deleted Successfully")
   };
 
@@ -46,7 +46,7 @@ const EachPostHeader = (props) => {
       postId: post._id,
     })
     toast.success("Post Approved Successfully")
-    console.log(data)
+    // console.log(data)
   }
 
   return (

@@ -76,7 +76,7 @@ const EachPostFooter = (props) =>{
         const result = await response.json()
         toast.success(`Comment added successfully`)
         setPostComment("")
-        console.log(result)
+        // console.log(result)
 
         
     }
@@ -119,7 +119,7 @@ const EachPostFooter = (props) =>{
 
             <button id={classes.commentButton} className={classes.activityButton} onClick={PostAllCommentsHandler}>
                 <i className="far fa-comment-alt" id={classes.commentButtontext}>
-                    </i><span className={classes.LikeText}>Comment</span>
+                    </i><span className={classes.LikeText}> Comment</span>
             </button>
         </div>
         <div className={classes.secondRow}>

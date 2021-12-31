@@ -13,7 +13,6 @@ const CreatePost = () => {
   const [inputText, setInputText] = useState("");
 
   const dispatch = useDispatch()
-  // const allPostsDataFromRedux = useSelector(state => state.posts.allposts)
 
   const cloudinaryUrl = "https://api.cloudinary.com/v1_1/buzzz-social-site/image/upload";
   const currentUser = localStorage.getItem("currentUserUsername");
@@ -63,7 +62,7 @@ const CreatePost = () => {
               }).then(response => response.json())
               .then(data => {
                 dispatch({type: "UPDATE_NEW_POST", payload: data}); 
-                console.log(data); 
+                // console.log(data); 
                 toast.success("Post Uploaded Successfully")})
               .catch(err => console.log(err))
             setLoading(false)

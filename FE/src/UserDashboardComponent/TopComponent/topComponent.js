@@ -8,7 +8,7 @@ const TopComponent = () => {
         const currentUserUsername = localStorage.getItem("currentUser");
 
         const selector = useSelector(state => state.users.loginUserInfo)
-        console.log(selector)
+        // console.log(selector)
 
 return <div className={classes.topComponent}>
           <img className={classes.coverImage} src={selector.loginUserObject.coverImageUrl} height="100%" width="100em" alt=""  onError={(e)=> e.target.setAttribute("src",SampleCoverImage)}></img>

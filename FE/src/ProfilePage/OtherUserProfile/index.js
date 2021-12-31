@@ -7,7 +7,7 @@ const OtherUserProfile = (props) => {
   const { getProfileData } = props;
   const currentUserUsername = localStorage.getItem("currentUserUsername");
 
-  console.log("nameis",getProfileData) 
+  // console.log("nameis",getProfileData) 
 
   const [addFriendBoolean, setAddFriendBoolean] = useState(false)
   const [alreadyFriend, setAlreadyFriend] = useState(false)
@@ -26,7 +26,7 @@ const OtherUserProfile = (props) => {
     }
   },[getProfileData, currentUserUsername])
 
-  console.log(alreadyFriend,addFriendBoolean)
+  // console.log(alreadyFriend,addFriendBoolean)
 
   const addFriendHandler = (friend) => {
     fetch("/addFriend",{
@@ -34,7 +34,7 @@ const OtherUserProfile = (props) => {
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({loginUser: currentUserUsername, friendUser:friend.username})
     }).then(res => res.json()).then(data => {
-      console.log(data)
+      // console.log(data)
       setAddFriendBoolean(prevState => !prevState)
     })
   } 

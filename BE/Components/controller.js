@@ -2,25 +2,23 @@ const users = require("./service")
 
 module.exports.getAllSuggestions = async (req, res) => {
    const response =  await users.getAllSuggestions(req.body)
-    res.send(response)
+    res.send(JSON.stringify(response))
 }
 module.exports.createUser = async (req, res) => {
     const response =  await users.createUser(req.body)
-     res.send(response)
+     res.send(JSON.stringify(response))
  }
 module.exports.getAllFriends = async(req, res) => {
     const response  = await users.getAllFriends(req.body)
-    res.send(response)
+    res.send(JSON.stringify(response))
 }
 module.exports.removeFriend = async(req, res) => {
     const response  = await users.removeFriend(req.body)
-    // console.log(response)
     res.send(JSON.stringify(response))
 }
 
 module.exports.addFriend = async(req, res) => {
     const response  = await users.addFriend(req.body)
-    console.log(response)
     res.send(JSON.stringify(response))
 }
 module.exports.googleLogin = async (req, res)=>{
@@ -47,18 +45,16 @@ module.exports.getPostAllComments = async (req, res)=>{
     res.send(JSON.stringify(response))
 }   
 module.exports.getPostLikesDislikesCommentsValues = async(req, res)=>{
-    // console.log(req.body)
     const response = await users.getPostLikesDislikesCommentsValues(req.body)
     res.send(JSON.stringify(response))
-    // console.log(response)
 }
 module.exports.getAllNotifications = async (req, res) => {
     const response = await users.getAllNotifications(req.body);
-    res.send(response);
+    res.send(JSON.stringify(response));
 }
 module.exports.acceptFriendRequest = async (req, res)=>{
     const response = await users.acceptFriendRequest(req.body)
-    res.send(response)
+    res.send(JSON.stringify(response))
 }
 module.exports.getLoginUserAllInformation = async (req, res) => {
     const response = await users.getLoginUserAllInformation(req.body);
@@ -81,13 +77,12 @@ module.exports.getAllReportedPosts = async (req, res) => {
     res.send(JSON.stringify(response));
 }   
 module.exports.deletePost = async (req, res) => {
-    console.log(req.body)
     const response = await users.deletePost(req.body);
     res.send(JSON.stringify(response));
 }
 module.exports.approvePost = async (req, res) => {
     const response = await users.approvePost(req.body);
-        res.send(JSON.stringify(response));
+    res.send(JSON.stringify(response));
 }
 module.exports.getFilteredSuggestion = async (req, res) => {
     const response = await users.getFilteredSuggestion(req.body);

@@ -12,7 +12,7 @@ const LoginUserProfile = (props) => {
   const inputImageCover = useRef(null);
 
 
-  console.log(getProfileData);
+  // console.log(getProfileData);
   const cloudinaryUrl =
     "https://api.cloudinary.com/v1_1/buzzz-social-site/image/upload";
   const loginUser = localStorage.getItem("currentUserUsername");
@@ -21,10 +21,10 @@ const LoginUserProfile = (props) => {
     setLoading(true);
     //api call for image upload on cloudinary
     var coverImageLink = "";
-    console.log(e);
-    console.log(e.target.files[0]);
+    // console.log(e);
+    // console.log(e.target.files[0]);
     if (e.target.files[0]) {
-      console.log("testttt");
+      // console.log("testttt");
       const files = new FormData();
       files.append("file", e.target.files[0]);
       files.append("upload_preset", "mqq4alyl");
@@ -34,7 +34,7 @@ const LoginUserProfile = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           coverImageLink = data.secure_url;
           // console.log('testttt 333333')
         })
@@ -43,7 +43,7 @@ const LoginUserProfile = (props) => {
           setLoading(false);
         });
     }
-    console.log(coverImageLink);
+    // console.log(coverImageLink);
     // console.log(data);
     //api call for IMAGE LINK upload on db
 
@@ -52,7 +52,7 @@ const LoginUserProfile = (props) => {
       loginUser,
       task,
     });
-    console.log(data);
+    // console.log(data);
     toast.success(`Image Uploaded Successfully`)
     // setCoverImageLink(data.coverImageLink)
     setLoading(false);

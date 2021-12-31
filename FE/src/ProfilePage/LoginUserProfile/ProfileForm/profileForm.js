@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const ProfileForm = (props) => {
 
     const { getProfileData: { userObject } } = props;
-    console.log(userObject)
+    // console.log(userObject)
     const loginUser = localStorage.getItem("currentUserUsername");
 
     const [inputFirstName, setInputFirstName] = useState(userObject.firstName);
@@ -30,12 +30,12 @@ const ProfileForm = (props) => {
         loginUser,
         task,
         });
-        console.log(data);
+        // console.log(data);
         toast.success("Update Successfully")
         
     };
     const handleRatioInput = (e) => {
-        console.log(e)
+        // console.log(e)
         setInputGender(e.target.value);
     }
     const resetButtonHandler = (e)=>{

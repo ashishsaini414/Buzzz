@@ -4,8 +4,7 @@ import classes from './eachFriendRequestNotification.module.css';
 const EachFriendRequestNotification = (props) => {
     const {notification} = props;
     const [isFriendRequestSent, setIsFriendRequestSent] = useState(false);
-
-    console.log(notification)
+    
     //here notification variable has the object of that person who send the friend request
 
     const currentUserUsername = localStorage.getItem("currentUserUsername");
@@ -18,8 +17,9 @@ const EachFriendRequestNotification = (props) => {
            body:JSON.stringify({loginUser: currentUserUsername,friendWhoSentTheFriendRequest : notification.username})
        })
        const result = await response.json()
-       setIsFriendRequestSent(true)
-       console.log(result);
+       if(result){
+        setIsFriendRequestSent(true)
+       }
     }
      return <div className={classes.EachNotification}>
         <div className={classes.message}>
