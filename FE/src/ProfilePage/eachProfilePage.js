@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useState } from "react";
-import classes from "./eachProfilePage.module.css";
 import { useParams } from "react-router-dom";
 import AccountOwnerProfile from "./LoginUserProfile";
 import axios from "axios";

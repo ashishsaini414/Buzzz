@@ -49,50 +49,61 @@ const EachPostFooter = (props) =>{
             body: JSON.stringify({user: currentUserUsername, reaction: condition, postId: likePost._id})
         })
         const res = await response.json()
+        if(res){
+            setLikeToggle(prevState => !prevState)
+        }
         // console.log(res)
         // setTotalLikes(res.totallikes)
-        setLikeToggle(prevState => !prevState)
     }
     const dislikeButtonHandler = async (dislikePost, condition) => {
         console.log(dislikePost)
-       const response =  await fetch("/postReaction",{
-            method: "POST",
-            headers:{"Content-Type":"application/json"},
-            body: JSON.stringify({user: currentUserUsername, reaction: condition, postId: dislikePost._id})
-        })
-        const res = await response.json()
-        // console.log(res)
-        // setTotalDisLikes(res.totalDislikes)
-        setDisLikeToggle(prevState => !prevState)
+        try{
+            await fetch("/postReaction",{
+                method: "POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify({user: currentUserUsername, reaction: condition, postId: dislikePost._id})
+            })
+            setDisLikeToggle(prevState => !prevState)
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     const commentSubmitHandler = async (event) => {
         event.preventDefault();
-        const response  = await fetch("/postComment",{
-            method: "POST",
-            headers:{"Content-Type": "application/json"},
-            body: JSON.stringify({message: postComment, postId: post._id, user: currentUserUsername})
-        })
-        const result = await response.json()
-        toast.success(`Comment added successfully`)
-        setPostComment("")
-        // console.log(result)
 
-        
+        try{
+            await fetch("/postComment",{
+                method: "POST",
+                headers:{"Content-Type": "application/json"},
+                body: JSON.stringify({message: postComment, postId: post._id, user: currentUserUsername})
+            })
+            setPostComment("")
+            // console.log(result)
+        }
+        catch(err){
+            console.log(err)
+        }
     }
     const PostAllCommentsHandler = async () =>{
         setCommentsShow(prevState => !prevState)
         if(commentsShow){
-            const response = await fetch("/getPostAllComments",{
-                method: "POST",
-                headers:{"Content-Type": "application/json"},
-                body: JSON.stringify({postId: post._id})
-            })
-            const result = await response.json()
-            if(result.length === 0){
-                toast.error("No comments")
+            try{
+                const response = await fetch("/getPostAllComments",{
+                    method: "POST",
+                    headers:{"Content-Type": "application/json"},
+                    body: JSON.stringify({postId: post._id})
+                })
+                const result = await response.json()
+                if(result.length === 0){
+                    toast.error("No comments")
+                }
+                setAllCommentsData(result)
             }
-            setAllCommentsData(result)
+            catch(err){
+                console.log(err)
+            }
         }
     }
     return(<div>

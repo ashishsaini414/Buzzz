@@ -63,7 +63,7 @@ const OtherUserProfile = (props) => {
         </div>
         <div>
           {!alreadyFriend ? !addFriendBoolean ? <button name="addFriend" className={classes.addFriendButton} onClick={() => addFriendHandler(getProfileData.userObject)}>
-            <i class="fas fa-user-plus"></i> Add Friend
+            <i className="fas fa-user-plus"></i> Add Friend
           </button> :  <button className={classes.requestSentButton}>Request Sent</button> : <button className={classes.alreadyFriendButton}>Already Friend</button>}
           <a
             href="https://www.google.com/"
@@ -71,7 +71,7 @@ const OtherUserProfile = (props) => {
             rel="noreferrer"
             className={classes.VisitWebsiteLink}
           >
-            <i class="fas fa-external-link-alt"></i> Visit Website
+            <i className="fas fa-external-link-alt"></i> Visit Website
           </a>
         </div>
         </div>

@@ -237,28 +237,28 @@ module.exports.postReaction = async (dataFromClient) =>{
     const post = await users.Posts.findById(postId)
 
     if(reaction === "like"){
-      console.log("hii this is starting for like")
+      // console.log("hii this is starting for like")
         const res = await post.updateOne({$push: {"postReactions.likes" : user}})
         const updatedpost = await users.Posts.findById(postId);
         const totallikes = await updatedpost.postReactions.likes.length
         return {updatedpost, totallikes}
     }
     if(reaction === "unlike"){
-      console.log("hii this is starting for unlike")
+      // console.log("hii this is starting for unlike")
         const response = await post.updateOne({$pull : {"postReactions.likes": user}});
         const updatedpost = await users.Posts.findById(postId);
         const totallikes = await updatedpost.postReactions.likes.length
         return {updatedpost, totallikes}
     }
      if(reaction === "dislike"){
-      console.log("hii this is starting for dislike")
+      // console.log("hii this is starting for dislike")
         const res = await post.updateOne({$push: {"postReactions.dislikes" : user}})
         const updatedpost = await users.Posts.findById(postId);
         const totalDislikes = await updatedpost.postReactions.dislikes.length
         return {updatedpost, totalDislikes}
     }
     if(reaction === "unDislike"){
-      console.log("hii this is starting for unDislike")
+      // console.log("hii this is starting for unDislike")
         const response = await post.updateOne({$pull : {"postReactions.dislikes": user}});
         const updatedpost = await users.Posts.findById(postId);
         const totalDislikes = await updatedpost.postReactions.dislikes.length

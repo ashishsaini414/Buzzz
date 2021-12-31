@@ -110,7 +110,7 @@ const AllPosts = (props) => {
             dataLength={ isModeratorModeON ? allReportedPostsDataFromRedux.length : allPostsDataFromRedux.length } //This is important field to render the next data
             next={fetchData}
             hasMore={hasMorePosts}
-            loader={<p className={classes.loader}><Loader/></p>}
+            loader={<h2 className={classes.loader}><Loader/></h2>}
             endMessage={
               <div className={classes.endMessage}>
                 {

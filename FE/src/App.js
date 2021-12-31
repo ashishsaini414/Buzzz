@@ -8,8 +8,6 @@ import ProfilePage from "./ProfilePage/profilePage";
 
 function App() {
   
-  const currentUserUsername = localStorage.getItem("currentUserUsername");
-  
   return (
     <div className="App">
       <ToastContainer autoClose={2000}/>

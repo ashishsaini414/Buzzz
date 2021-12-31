@@ -46,16 +46,23 @@ const LoginUserProfile = (props) => {
     // console.log(coverImageLink);
     // console.log(data);
     //api call for IMAGE LINK upload on db
-
-    const { data } = await axios.post("/updateProfileData", {
-      coverImageLink,
-      loginUser,
-      task,
-    });
-    // console.log(data);
-    toast.success(`Image Uploaded Successfully`)
-    // setCoverImageLink(data.coverImageLink)
-    setLoading(false);
+    try{
+      const { data } = await axios.post("/updateProfileData", {
+        coverImageLink,
+        loginUser,
+        task,
+      });
+      // console.log(data);
+      if(data){
+        toast.success(`Image Uploaded Successfully`)
+      }
+      // setCoverImageLink(data.coverImageLink)
+      setLoading(false);
+    }
+    catch(err){
+      console.log(err)
+    }
+    
   };
 
   return (
@@ -110,7 +117,7 @@ const LoginUserProfile = (props) => {
             ></img>
           </div>
           <label htmlFor="imageUpdate" className={classes.profileImageEdit}>
-            <i class="fas fa-camera"></i>
+            <i className="fas fa-camera"></i>
           </label>
           <input
             type="file"

@@ -31,7 +31,9 @@ const ProfileForm = (props) => {
         task,
         });
         // console.log(data);
+        if(data) {
         toast.success("Update Successfully")
+      }
         
     };
     const handleRatioInput = (e) => {
